@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "185240568584",
+    "project_id": "paily-app",
+    "storage_bucket": "paily-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185240568584:android:28e0a1b814f868da1822bd",
+        "android_client_info": {
+          "package_name": "com.paily"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyojgnvmWnUIDi-64psp7MV0T_Dt44bAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
