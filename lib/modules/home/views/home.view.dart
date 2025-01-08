@@ -6,6 +6,7 @@ import 'package:paily/modules/home/widgets/section_group.widget.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/action_banner.widget.dart';
 import 'package:paily/shared/widgets/head_search_bar.widget.dart';
+import 'package:paily/shared/widgets/image_card.widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -35,7 +36,7 @@ class HomeView extends StatelessWidget {
 
               SizedBox(height: 24,),
               SectionGroup(
-                title: 'Recent Transactions',
+                title: 'Services',
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -61,6 +62,20 @@ class HomeView extends StatelessWidget {
                     )
                   ],
                 ),
+              ),
+              SectionGroup(
+                title: 'Services',
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: ImageCard(
+                      imageUrl: 'https://vietnamhoneymoontravel.com/wp-content/uploads/2021/09/Introduction-to-Danang-The-Most-Livable-City-in-Vietnam.jpg', 
+                      title: 'Hello', 
+                      description: 'This is a description',
+                      width: 240,
+                    ),
+                  );
+                },
               ),
             ],
           ),
