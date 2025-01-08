@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDyojgnvmWnUIDi-64psp7MV0T_Dt44bAk',
-    appId: '1:185240568584:android:28e0a1b814f868da1822bd',
+    appId: '1:185240568584:android:d43d7b654ff33a4b1822bd',
     messagingSenderId: '185240568584',
     projectId: 'paily-app',
     storageBucket: 'paily-app.firebasestorage.app',

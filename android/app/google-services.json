@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:185240568584:android:28e0a1b814f868da1822bd",
+        "mobilesdk_app_id": "1:185240568584:android:d43d7b654ff33a4b1822bd",
         "android_client_info": {
-          "package_name": "com.paily"
+          "package_name": "com.paily.paily"
         }
       },
       "oauth_client": [],
