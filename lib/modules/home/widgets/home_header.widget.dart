@@ -13,6 +13,7 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.only(left: AppPaddingTheme.viewPadding),
         child: _LocationSelect(),
       ),
+      leadingWidth: 200,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: AppPaddingTheme.viewPadding),

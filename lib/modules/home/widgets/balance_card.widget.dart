@@ -4,6 +4,8 @@ import 'package:paily/shared/themes/app_typography.theme.dart';
 import 'package:paily/shared/widgets/action_button.widget.dart';
 
 class BalanceCard extends StatelessWidget {
+  const BalanceCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
