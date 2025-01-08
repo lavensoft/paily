@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
       appBar: HomeHeader(),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: AppPaddingTheme.viewPadding),
+          padding: AppPaddingTheme.viewPadding,
           child: Column(
             children: [
               HeadSearchBar(),
@@ -37,7 +37,23 @@ class HomeView extends StatelessWidget {
               SectionGroup(
                 title: 'Recent Transactions',
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    MiniAppButton(
+                      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
+                      label: 'Mini app', 
+                      onTap: () {  },
+                    ),
+                    MiniAppButton(
+                      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
+                      label: 'Mini app', 
+                      onTap: () {  },
+                    ),
+                    MiniAppButton(
+                      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
+                      label: 'Mini app', 
+                      onTap: () {  },
+                    ),
                     MiniAppButton(
                       imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
                       label: 'Mini app', 

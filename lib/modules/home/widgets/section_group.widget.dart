@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class SectionGroup extends StatelessWidget {
@@ -9,16 +10,19 @@ class SectionGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: AppTypography.title3,
-        ),
-        SizedBox(height: 12.0), // Add some spacing
-        child,
-      ],
+    return Padding(
+      padding: AppPaddingTheme.viewPadding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: AppTypography.title3,
+          ),
+          SizedBox(height: 15.0), // Add some spacing
+          child,
+        ],
+      ),
     );
   }
 }

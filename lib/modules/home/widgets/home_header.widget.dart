@@ -10,13 +10,19 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: Padding(
-        padding: const EdgeInsets.only(left: AppPaddingTheme.viewPadding),
+        padding: AppPaddingTheme.viewPadding.copyWith(
+          top: 0,
+          bottom: 0,
+        ),
         child: _LocationSelect(),
       ),
       leadingWidth: 200,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: AppPaddingTheme.viewPadding),
+          padding: AppPaddingTheme.viewPadding.copyWith(
+            top: 0,
+            bottom: 0,
+          ),
           child: IconButton(
             icon: const Icon(
               HugeIcons.strokeRoundedNotification01,
