@@ -8,7 +8,7 @@ class AppTypography {
   );
 
   static const TextStyle title3 = TextStyle(
-    fontSize: 21,
+    fontSize: 18,
     fontWeight: FontWeight.w500,
     color: Colors.black,
   );
