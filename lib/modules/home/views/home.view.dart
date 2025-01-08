@@ -18,7 +18,11 @@ class HomeView extends StatelessWidget {
           child: Column(
             children: [
               HeadSearchBar(),
+              
+              SizedBox(height: 15,),
               BalanceCard(),
+
+              SizedBox(height: 24,),
               ActionBanner(
                 title: 'Hello',
                 description: 'This is a description',
