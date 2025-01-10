@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:paily/modules/payment/views/qr_scan.view.dart';
 import 'package:paily/shared/themes/app_typography.theme.dart';
 import 'package:paily/shared/widgets/action_button.widget.dart';
 
@@ -59,7 +61,12 @@ class BalanceCard extends StatelessWidget {
               ActionButton(
                 icon: HugeIcons.strokeRoundedQrCode01,
                 label: 'QR Scan',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context, 
+                    CupertinoPageRoute(builder: (context) => QRScanView())
+                  );
+                },
               ),
               ActionButton(
                 icon: HugeIcons.strokeRoundedGift,
