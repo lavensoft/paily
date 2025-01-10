@@ -9,7 +9,7 @@ class PaymentAccountInputView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: Colors.white,
       child: SafeArea(
         child: Scaffold(

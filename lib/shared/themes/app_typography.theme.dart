@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AppTypography {
+  static const TextStyle largeTitle3 = TextStyle(
+    fontSize: 39,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
+  static const TextStyle title = TextStyle(
+    fontSize: 33,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
+  );
+
   static const TextStyle title1 = TextStyle(
     fontSize: 27,
     fontWeight: FontWeight.w500,

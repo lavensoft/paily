@@ -21,7 +21,7 @@ class Button extends StatelessWidget {
         backgroundColor: Colors.black,
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 24),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(9),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
       onPressed: onPressed,
