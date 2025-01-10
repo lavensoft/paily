@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class ImageCard extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String description;
-  final double width;
-  final double? height;
 
   const ImageCard({
     super.key,
@@ -17,6 +12,12 @@ class ImageCard extends StatelessWidget {
     required this.width,
     this.height,
   });
+  
+  final String imageUrl;
+  final String title;
+  final String description;
+  final double width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {

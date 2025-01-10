@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:paily/modules/payment/views/payment_account_input.view.dart';
 import 'package:paily/modules/payment/views/payment_amount_input.view.dart';
+import 'package:paily/modules/payment/views/payment_confirm.view.dart';
 import 'package:paily/modules/payment/views/qr_scan.view.dart';
 import 'package:paily/shared/themes/app_typography.theme.dart';
 import 'package:paily/shared/widgets/action_button.widget.dart';
@@ -83,7 +84,12 @@ class BalanceCard extends StatelessWidget {
               ActionButton(
                 icon: HugeIcons.strokeRoundedGift,
                 label: 'Cashback',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) => PaymentConfirmView())
+                  );
+                },
               ),
             ],
           )
