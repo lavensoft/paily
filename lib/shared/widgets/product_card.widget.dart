@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class ProductCard extends StatelessWidget {
   final String imageUrl;
@@ -19,6 +18,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       width: width,
       height: height,
@@ -49,13 +50,12 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTypography.headline.copyWith(
+                    style: theme.textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
                     description,
-                    style: AppTypography.bodyText,
                   ),
                 ],
               ),

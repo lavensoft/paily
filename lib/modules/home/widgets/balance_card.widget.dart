@@ -5,7 +5,6 @@ import 'package:paily/modules/payment/views/payment_account_input.view.dart';
 import 'package:paily/modules/payment/views/payment_amount_input.view.dart';
 import 'package:paily/modules/payment/views/payment_confirm.view.dart';
 import 'package:paily/modules/payment/views/qr_scan.view.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 import 'package:paily/shared/widgets/action_button.widget.dart';
 
 class BalanceCard extends StatelessWidget {
@@ -13,6 +12,8 @@ class BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       padding: EdgeInsets.all(21),
       decoration: BoxDecoration(
@@ -28,7 +29,7 @@ class BalanceCard extends StatelessWidget {
             children: [
               Text(
                 'Total balance',
-                style: AppTypography.headline.copyWith(
+                style: theme.textTheme.bodyLarge!.copyWith(
                   color: Color.fromRGBO(174, 174, 174, 1)
                 ),
               ),
@@ -36,13 +37,13 @@ class BalanceCard extends StatelessWidget {
           ),
           Text(
             '\$ 1.000,00',
-            style: AppTypography.title1.copyWith(
+            style: theme.textTheme.titleLarge!.copyWith(
               color: Colors.white
             ),
           ),
           Text(
             'VND 23.000.000',
-            style: AppTypography.headline.copyWith(
+            style: theme.textTheme.bodyLarge!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w500
             ),

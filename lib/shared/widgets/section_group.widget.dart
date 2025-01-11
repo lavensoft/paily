@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class SectionGroup extends StatelessWidget {
   const SectionGroup({
@@ -18,13 +17,15 @@ class SectionGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           title,
-          style: AppTypography.title3,
+          style: theme.textTheme.titleSmall,
         ),
         SizedBox(height: 15.0), // Add some spacing
         child ?? 

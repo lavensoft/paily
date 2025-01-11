@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 import 'package:paily/shared/widgets/rounded_button.widget.dart';
 
 class ActionBanner extends StatelessWidget {
@@ -21,6 +20,8 @@ class ActionBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Stack(
       children: [
         Container(
@@ -42,7 +43,7 @@ class ActionBanner extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: AppTypography.headline.copyWith(
+                style: theme.textTheme.bodyLarge!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
@@ -50,7 +51,7 @@ class ActionBanner extends StatelessWidget {
               SizedBox(height: 2.0),
               Text(
                 description,
-                style: AppTypography.bodyText.copyWith(
+                style: theme.textTheme.bodyMedium!.copyWith(
                   color: Colors.white,
                 ),
               ),

@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class ImageCard extends StatelessWidget {
 
@@ -21,6 +20,8 @@ class ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       width: width,
       height: height ?? double.infinity,
@@ -58,7 +59,7 @@ class ImageCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTypography.headline.copyWith(
+                    style: theme.textTheme.bodyMedium!.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
@@ -66,7 +67,7 @@ class ImageCard extends StatelessWidget {
                   SizedBox(height: 5),
                   Text(
                     description,
-                    style: AppTypography.bodyText.copyWith(
+                    style: theme.textTheme.bodyMedium!.copyWith(
                       color: Colors.white,
                     ),
                   ),

@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class MiniAppButton extends StatefulWidget {
   final String imageUrl;
@@ -61,7 +60,6 @@ class _MiniAppButtonState extends State<MiniAppButton> with SingleTickerProvider
             SizedBox(height: 8.0),
             Text(
               widget.label,
-              style: AppTypography.bodyText,
             ),
           ],
         ),

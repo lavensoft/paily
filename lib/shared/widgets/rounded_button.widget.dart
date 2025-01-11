@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
@@ -12,6 +11,8 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -23,7 +24,7 @@ class RoundedButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: AppTypography.bodyText.copyWith(
+        style: theme.textTheme.bodyMedium!.copyWith(
           color: Colors.black,
           fontWeight: FontWeight.w600,
         ),

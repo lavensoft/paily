@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
-import 'package:paily/shared/widgets/button.widget.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
 
 class PaymentAmountInputView extends StatelessWidget {
@@ -37,6 +35,8 @@ class PaymentAmountInputView extends StatelessWidget {
   }
 
   Widget bottomBar(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Padding(
       padding: AppPaddingTheme.viewPadding,
       child: Column(
@@ -56,7 +56,7 @@ class PaymentAmountInputView extends StatelessWidget {
                 horizontal: 15,
               ),
               hintText: 'Transaction remark',
-              hintStyle: AppTypography.bodyText.copyWith(
+              hintStyle: theme.textTheme.bodyMedium!.copyWith(
                 color: Colors.grey,
               ),
               prefixIcon: Icon(
@@ -66,8 +66,8 @@ class PaymentAmountInputView extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            child: Button(
-              'Next', 
+            child: ElevatedButton(
+              child: Text('Next'), 
               onPressed: () {}
             )
           )
@@ -77,6 +77,8 @@ class PaymentAmountInputView extends StatelessWidget {
   }
 
   Widget inputForm(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -93,18 +95,18 @@ class PaymentAmountInputView extends StatelessWidget {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '0 đ',
-                hintStyle: AppTypography.largeTitle3.copyWith(
+                hintStyle: theme.textTheme.titleSmall!.copyWith(
                   color: Colors.grey,
                 ),
                 border: InputBorder.none,
               ),
-              style: AppTypography.largeTitle3,
+              style: theme.textTheme.titleSmall,
               textAlign: TextAlign.center,
             ),
           ),
           Text(
             '\$ 23.000.000',
-            style: AppTypography.headline,
+            style: theme.textTheme.bodyLarge,
           )
         ],
       )
@@ -112,6 +114,8 @@ class PaymentAmountInputView extends StatelessWidget {
   }
 
   Widget bankSelect(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -135,14 +139,14 @@ class PaymentAmountInputView extends StatelessWidget {
               children: [
                 Text(
                   'Vietcombank', 
-                  style: AppTypography.bodyText.copyWith(
+                  style: theme.textTheme.bodyMedium!.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 Text(
                   'NH THCP Ngoai Thuong VN', 
-                  style: AppTypography.bodyText.copyWith(
+                  style: theme.textTheme.bodyMedium!.copyWith(
                     color: Colors.black,
                   ),
                 ),

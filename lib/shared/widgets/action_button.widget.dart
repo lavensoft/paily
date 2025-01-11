@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class ActionButton extends StatelessWidget {
   final IconData icon;
@@ -15,6 +14,8 @@ class ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       children: [
         ElevatedButton(
@@ -34,7 +35,7 @@ class ActionButton extends StatelessWidget {
         SizedBox(height: 8.0),
         Text(
           label,
-          style: AppTypography.subheadline1.copyWith(
+          style: theme.textTheme.bodyMedium!.copyWith(
             color: Colors.white,
           ),
         ),

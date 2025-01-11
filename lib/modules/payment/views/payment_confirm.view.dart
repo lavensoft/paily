@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
-import 'package:paily/shared/widgets/button.widget.dart';
 import 'package:paily/shared/widgets/section_group.widget.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
 
@@ -24,6 +22,8 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return ColoredBox(
       color: Colors.white,
       child: SafeArea(
@@ -43,12 +43,12 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                   children: [
                     Text(
                       'Total',
-                      style: AppTypography.title3,
+                      style: theme.textTheme.titleSmall,
                     ),
                     Spacer(),
                     Text(
                       '\$10.2',
-                      style: AppTypography.title3.copyWith(
+                      style: theme.textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -57,8 +57,8 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                 SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
-                  child: Button(
-                    'Confirm Payment',
+                  child: ElevatedButton(
+                    child: Text('Confirm Payment'),
                     onPressed: () {},
                   ),
                 )
@@ -96,7 +96,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                     child: Container(
                       padding: EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: theme.colorScheme.surface,
                         borderRadius: BorderRadius.circular(9),
                       ),
                       child: Column(
@@ -106,44 +106,44 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                              Text('Amount', style: AppTypography.bodyText),
-                              Text('VND 20.000 (\$10.00)', style: AppTypography.bodyText),
+                              Text('Amount'),
+                              Text('VND 20.000 (\$10.00)'),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                              Text('Send to', style: AppTypography.bodyText),
-                              Text('TRAN QUANG NHAT', style: AppTypography.bodyText),
+                              Text('Send to'),
+                              Text('TRAN QUANG NHAT'),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Bank', style: AppTypography.bodyText),
-                                Text('Vietcombank', style: AppTypography.bodyText),
+                                Text('Bank'),
+                                Text('Vietcombank'),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Account Number', style: AppTypography.bodyText),
-                                Text('20782048', style: AppTypography.bodyText),
+                                Text('Account Number'),
+                                Text('20782048'),
                               ],
                             ),
                             Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Fee (2%)', style: AppTypography.bodyText),
-                                Text('\$0.2', style: AppTypography.bodyText),
+                                Text('Fee (2%)'),
+                                Text('\$0.2'),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Total', style: AppTypography.bodyText),
-                                Text('\$10.2', style: AppTypography.bodyText),
+                                Text('Total'),
+                                Text('\$10.2'),
                               ],
                             ),
                             Container(
@@ -154,17 +154,16 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                 children: [
                                   Text(
                                     'Coupon', 
-                                    style: AppTypography.title3
+                                    style: theme.textTheme.titleSmall
                                   ),
                                   Text(
-                                    'Add a coupon or enter a promo code', 
-                                    style: AppTypography.bodyText
+                                    'Add a coupon or enter a promo code',
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(top: 12),
                                     width: double.infinity,
-                                    child: Button(
-                                      'Add a coupon', 
+                                    child: ElevatedButton(
+                                      child: Text('Add a coupon'), 
                                       onPressed: () async {
                                         await showModalBottomSheet(
                                           context: context, 
@@ -176,7 +175,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                                 children: [
                                                   Text(
                                                     'Add a coupon',
-                                                    style: AppTypography.title3,
+                                                    style: theme.textTheme.titleSmall
                                                   ),
                                                   SizedBox(height: 12),
                                                   Container(
@@ -191,7 +190,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                                       children: [
                                                         Text(
                                                           'Shop Name',
-                                                          style: AppTypography.bodyText.copyWith(
+                                                          style: theme.textTheme.bodyMedium!.copyWith(
                                                             fontWeight: FontWeight.w600,
                                                           ),
                                                         ),
@@ -207,7 +206,6 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                                             SizedBox(width: 12),
                                                             Text(
                                                               'Discount 10% for all products',
-                                                              style: AppTypography.bodyText,
                                                             ),
                                                           ],
                                                         ),
@@ -227,7 +225,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                                           ),
                                                           child: Text(
                                                             'Expires on: 12/12/2023',
-                                                            style: AppTypography.subheadline1.copyWith(
+                                                            style: theme.textTheme.bodySmall!.copyWith(
                                                               color: Colors.white,
                                                               fontWeight: FontWeight.w600,
                                                             ),
@@ -294,6 +292,8 @@ class WalletCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: () => onSelect(index),
       child: Container(
@@ -325,13 +325,13 @@ class WalletCard extends StatelessWidget {
               children: [
                 Text(
               title,
-              style: AppTypography.bodyText.copyWith(
+              style: theme.textTheme.bodyMedium!.copyWith(
                 fontWeight: FontWeight.w600
               )
                 ),
                 Text(
               balance,
-              style: AppTypography.subheadline1.copyWith(
+              style: theme.textTheme.bodySmall!.copyWith(
                 color: Colors.grey
               )
                 ),

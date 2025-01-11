@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:paily/shared/themes/app_typography.theme.dart';
 
 class PaymentAccountInputForm extends StatelessWidget {
   const PaymentAccountInputForm({super.key});
@@ -19,6 +18,8 @@ class PaymentAccountInputForm extends StatelessWidget {
   }
 
   Widget bankSelect(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -47,14 +48,14 @@ class PaymentAccountInputForm extends StatelessWidget {
               children: [
                 Text(
                   'Vietcombank', 
-                  style: AppTypography.bodyText.copyWith(
+                  style: theme.textTheme.bodyMedium!.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 Text(
                   'NH THCP Ngoai Thuong VN', 
-                  style: AppTypography.bodyText.copyWith(
+                  style: theme.textTheme.bodyMedium!.copyWith(
                     color: Colors.black,
                   ),
                 ),
@@ -71,11 +72,12 @@ class PaymentAccountInputForm extends StatelessWidget {
   }
 
   Widget numberInput(BuildContext context) {
-    TextEditingController _controller = TextEditingController();
+    final theme = Theme.of(context);
+    TextEditingController controller = TextEditingController();
 
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
-        _controller.addListener(() {
+        controller.addListener(() {
           setState(() {});
         });
 
@@ -99,12 +101,12 @@ class PaymentAccountInputForm extends StatelessWidget {
             children: [
               Expanded(
                 child: TextField(
-                  controller: _controller,
-                  style: AppTypography.bodyText.copyWith(
+                  controller: controller,
+                  style: theme.textTheme.bodyMedium!.copyWith(
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    hintStyle: AppTypography.bodyText.copyWith(
+                    hintStyle: theme.textTheme.bodyMedium!.copyWith(
                       color: Colors.blueGrey,
                     ),
                     hintText: 'Account number',
@@ -112,13 +114,13 @@ class PaymentAccountInputForm extends StatelessWidget {
                   ),
                 ),
               ),
-              if (_controller.text.isNotEmpty)
+              if (controller.text.isNotEmpty)
                 IconButton(
                   icon: Icon(
                     HugeIcons.strokeRoundedCancel01,
                   ),
                   onPressed: () {
-                    _controller.clear();
+                    controller.clear();
                   },
                 ),
               Icon(
@@ -133,6 +135,8 @@ class PaymentAccountInputForm extends StatelessWidget {
   }
   
   Widget nameInput(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       padding: EdgeInsets.only(
         left: 15,
@@ -154,11 +158,11 @@ class PaymentAccountInputForm extends StatelessWidget {
             Expanded(
             child: TextField(
               enabled: false,
-              style: AppTypography.bodyText.copyWith(
+              style: theme.textTheme.bodyMedium!.copyWith(
               color: Colors.black,
               ),
               decoration: InputDecoration(
-              hintStyle: AppTypography.bodyText.copyWith(
+              hintStyle: theme.textTheme.bodyMedium!.copyWith(
                 color: Colors.blueGrey,
               ),
               hintText: 'Account name',
