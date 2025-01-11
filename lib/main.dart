@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:paily/core/widgets/app_padding.widget.dart';
 import 'package:paily/modules/home/views/home.view.dart';
-import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,14 +16,7 @@ void main() async {
     appleProvider: AppleProvider.appAttest,
   );
 
-  runApp(
-    ProviderScope(
-      child: AppPadding(
-        padding: AppPaddingTheme.viewPadding, 
-        child: const App()
-      )
-    )
-  );
+  runApp(ProviderScope(child: const App()));
 }
 
 class App extends StatelessWidget {
