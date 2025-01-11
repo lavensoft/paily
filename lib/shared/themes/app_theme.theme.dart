@@ -20,15 +20,13 @@ class AppTheme {
     ),
 
     //#region Buttons
-    elevatedButtonTheme: ElevatedButtonThemeData(
+    filledButtonTheme: FilledButtonThemeData(
       style: ElevatedButton.styleFrom(
         shadowColor: Colors.transparent,
-        backgroundColor: CupertinoColors.activeBlue,
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 24),
         shape: RoundedRectangleBorder(
           borderRadius: AppRadiusTheme.childRadius,
         ),
-        foregroundColor: Colors.white,
       ),
     ),
     //#endregion
@@ -50,7 +48,8 @@ class AppTheme {
       primary: CupertinoColors.activeBlue,
       primaryContainer: CupertinoColors.activeBlue.withOpacity(.06),
 
-      secondary: CupertinoColors.activeGreen,
+      secondary: CupertinoColors.activeBlue.withOpacity(.06),
+      onSecondaryContainer: CupertinoColors.activeBlue,
 
       surface: Colors.white,
 
@@ -69,7 +68,7 @@ class AppTheme {
         color: Colors.black,
       ),
       titleMedium: TextStyle(
-        fontSize: 33,
+        fontSize: 24,
         fontWeight: FontWeight.w600,
         color: Colors.black,
       ),

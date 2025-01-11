@@ -11,6 +11,7 @@ class ImageCard extends StatelessWidget {
     required this.description,
     required this.width,
     this.height,
+    this.onTap,
   });
   
   final String imageUrl;
@@ -18,6 +19,7 @@ class ImageCard extends StatelessWidget {
   final String description;
   final double width;
   final double? height;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,53 +31,56 @@ class ImageCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: AppRadiusTheme.containerRadius,
       ),
-      child: ClipRRect(
-        borderRadius: AppRadiusTheme.containerRadius,
-        child: Stack(
-          children: [
-            CachedNetworkImage(
-              imageUrl: imageUrl,
-              width: width,
-              height: height ?? double.infinity,
-              fit: BoxFit.cover,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.6),
+      child: InkWell(
+        onTap: onTap,
+        child: ClipRRect(
+          borderRadius: AppRadiusTheme.containerRadius,
+          child: Stack(
+            children: [
+              CachedNetworkImage(
+                imageUrl: imageUrl,
+                width: width,
+                height: height ?? double.infinity,
+                fit: BoxFit.cover,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.6),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 21,
+                left: 21,
+                right: 21,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      description,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 21,
-              left: 21,
-              right: 21,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    description,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

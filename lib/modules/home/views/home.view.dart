@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paily/modules/home/widgets/balance_card.widget.dart';
 import 'package:paily/modules/home/widgets/home_header.widget.dart';
 import 'package:paily/modules/home/widgets/mini_app_button.widget.dart';
+import 'package:paily/modules/store/views/store.view.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/action_banner.widget.dart';
 import 'package:paily/shared/widgets/head_search_bar.widget.dart';
@@ -88,6 +89,14 @@ class HomeView extends StatelessWidget {
                       title: 'Hello', 
                       description: 'This is a description',
                       width: 240,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StoreView(),
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
