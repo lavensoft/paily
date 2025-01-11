@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:paily/shared/themes/app_radius.theme.dart';
 
 class AppTheme {
   static final light = ThemeData(
@@ -25,7 +26,7 @@ class AppTheme {
         backgroundColor: CupertinoColors.activeBlue,
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 24),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppRadiusTheme.childRadius,
         ),
         foregroundColor: Colors.white,
       ),

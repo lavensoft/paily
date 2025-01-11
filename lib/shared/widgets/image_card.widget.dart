@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:paily/shared/themes/app_radius.theme.dart';
 
 class ImageCard extends StatelessWidget {
 
@@ -26,10 +27,10 @@ class ImageCard extends StatelessWidget {
       width: width,
       height: height ?? double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(21),
+        borderRadius: AppRadiusTheme.containerRadius,
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(21),
+        borderRadius: AppRadiusTheme.containerRadius,
         child: Stack(
           children: [
             CachedNetworkImage(

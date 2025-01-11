@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paily/shared/themes/app_radius.theme.dart';
 
 class ProductCard extends StatelessWidget {
   final String imageUrl;
@@ -24,7 +25,7 @@ class ProductCard extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(21),
+        borderRadius: AppRadiusTheme.containerRadius,
         color: Colors.white,
       ),
       child: InkWell(

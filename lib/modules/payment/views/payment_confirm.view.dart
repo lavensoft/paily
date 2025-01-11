@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
+import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/section_group.widget.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
 
@@ -97,7 +98,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                       padding: EdgeInsets.all(15),
                       decoration: BoxDecoration(
                         color: theme.colorScheme.surface,
-                        borderRadius: BorderRadius.circular(9),
+                        borderRadius: AppRadiusTheme.containerRadius,
                       ),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,7 +309,7 @@ class WalletCard extends StatelessWidget {
             width: isSelected ? 2 : 1,
             strokeAlign: BorderSide.strokeAlignOutside
           ),
-          borderRadius: BorderRadius.circular(9),
+          borderRadius: AppRadiusTheme.childRadius,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

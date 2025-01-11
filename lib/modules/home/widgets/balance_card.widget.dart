@@ -5,6 +5,7 @@ import 'package:paily/modules/payment/views/payment_account_input.view.dart';
 import 'package:paily/modules/payment/views/payment_amount_input.view.dart';
 import 'package:paily/modules/payment/views/payment_confirm.view.dart';
 import 'package:paily/modules/payment/views/qr_scan.view.dart';
+import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/action_button.widget.dart';
 
 class BalanceCard extends StatelessWidget {
@@ -18,7 +19,7 @@ class BalanceCard extends StatelessWidget {
       padding: EdgeInsets.all(21),
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(21)
+        borderRadius: AppRadiusTheme.containerRadius
       ),
       height: 240,
       child: Column(
