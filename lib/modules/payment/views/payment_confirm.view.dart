@@ -210,7 +210,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                                     margin: EdgeInsets.only(top: 24),
                                                     padding: EdgeInsets.all(15),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.white,
+                                                      color: theme.colorScheme.surfaceContainerLowest,
                                                       borderRadius: BorderRadius.circular(15),
                                                     ),
                                                     child: Column(
@@ -237,24 +237,19 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                                             ),
                                                           ],
                                                         ),
-                                                        SizedBox(height: 3),
-                                                        Divider(
-                                                          color: Colors.grey,
-                                                          thickness: 1,
-                                                          indent: 10,
-                                                          endIndent: 10,
-                                                        ),
-                                                        SizedBox(height: 3),
+                                                        SizedBox(height: 6),
+                                                        Divider(),
+                                                        SizedBox(height: 6),
                                                         Container(
                                                           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                                           decoration: BoxDecoration(
-                                                            color: Colors.green,
+                                                            color: theme.colorScheme.primaryContainer,
                                                             borderRadius: BorderRadius.circular(12),
                                                           ),
                                                           child: Text(
                                                             'Expires on: 12/12/2023',
                                                             style: theme.textTheme.bodySmall!.copyWith(
-                                                              color: Colors.white,
+                                                              color: theme.colorScheme.primary,
                                                               fontWeight: FontWeight.w600,
                                                             ),
                                                           ),

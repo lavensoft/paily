@@ -33,6 +33,13 @@ class AppTheme {
     ),
     //#endregion
 
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: AppRadiusTheme.containerRadius,
+      ),
+    ),
+
     dividerTheme: DividerThemeData(
       space: 0,
       thickness: 1,
