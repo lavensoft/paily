@@ -25,14 +25,14 @@ class AppTypography {
     color: Colors.black,
   );
 
-  static const TextStyle bodyText = TextStyle(
-    fontSize: 14,
+  static const TextStyle headline = TextStyle(
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     color: Colors.black,
   );
 
-  static const TextStyle headline = TextStyle(
-    fontSize: 15,
+  static const TextStyle bodyText = TextStyle(
+    fontSize: 14,
     fontWeight: FontWeight.w400,
     color: Colors.black,
   );
