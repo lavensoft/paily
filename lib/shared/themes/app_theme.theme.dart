@@ -21,7 +21,7 @@ class AppTheme {
 
     //#region Buttons
     filledButtonTheme: FilledButtonThemeData(
-      style: ElevatedButton.styleFrom(
+      style: FilledButton.styleFrom(
         shadowColor: Colors.transparent,
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 24),
         shape: RoundedRectangleBorder(

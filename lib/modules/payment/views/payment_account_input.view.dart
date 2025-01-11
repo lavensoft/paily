@@ -15,7 +15,7 @@ class PaymentAccountInputView extends StatelessWidget {
           appBar: PaymentAccountInputAppBar(),
           bottomNavigationBar: Padding(
             padding: AppPaddingTheme.viewPadding,
-            child: ElevatedButton(
+            child: FilledButton(
               child: Text('Next'),
               onPressed: () {},
             ),

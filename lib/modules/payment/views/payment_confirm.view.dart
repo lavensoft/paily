@@ -58,7 +58,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                 SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
+                  child: FilledButton(
                     child: Text('Confirm Payment'),
                     onPressed: () {},
                   ),
@@ -190,7 +190,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                                   Container(
                                     margin: EdgeInsets.only(top: 12),
                                     width: double.infinity,
-                                    child: ElevatedButton(
+                                    child: FilledButton(
                                       child: Text('Add a coupon'), 
                                       onPressed: () async {
                                         await showModalBottomSheet(

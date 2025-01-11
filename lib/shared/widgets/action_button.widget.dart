@@ -18,8 +18,8 @@ class ActionButton extends StatelessWidget {
 
     return Column(
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
+        FilledButton(
+          style: FilledButton.styleFrom(
             shape: CircleBorder(),
             padding: EdgeInsets.all(8.0),
             backgroundColor: Color.fromRGBO(255, 255, 255, .2),

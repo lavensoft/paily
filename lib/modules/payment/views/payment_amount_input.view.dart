@@ -66,7 +66,7 @@ class PaymentAmountInputView extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            child: ElevatedButton(
+            child: FilledButton(
               child: Text('Next'), 
               onPressed: () {}
             )
