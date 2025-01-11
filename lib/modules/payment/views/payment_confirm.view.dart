@@ -97,7 +97,7 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                     child: Container(
                       padding: EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.surface,
+                        color: theme.colorScheme.surfaceContainerLowest,
                         borderRadius: AppRadiusTheme.containerRadius,
                       ),
                       child: Column(
@@ -107,44 +107,71 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                              Text('Amount'),
-                              Text('VND 20.000 (\$10.00)'),
+                                Text('Amount'),
+                                Text(
+                                  'VND 20.000 (\$10.00)',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                              Text('Send to'),
-                              Text('TRAN QUANG NHAT'),
+                                Text('Send to'),
+                                Text(
+                                  'TRAN QUANG NHAT',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Bank'),
-                                Text('Vietcombank'),
+                                  Text('Bank'),
+                                  Text(
+                                    'Vietcombank',
+                                    style: theme.textTheme.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Account Number'),
-                                Text('20782048'),
+                                  Text('Account Number'),
+                                  Text('20782048',
+                                    style: theme.textTheme.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                               ],
                             ),
                             Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Fee (2%)'),
-                                Text('\$0.2'),
+                                  Text('Fee (2%)'),
+                                  Text('\$0.2',
+                                    style: theme.textTheme.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Total'),
-                                Text('\$10.2'),
+                                  Text('Total'),
+                                  Text('\$10.2',
+                                    style: theme.textTheme.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                               ],
                             ),
                             Container(
@@ -303,9 +330,9 @@ class WalletCard extends StatelessWidget {
           vertical: 9,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.grey.shade100 : Colors.white,
+          color: isSelected ? theme.colorScheme.primaryContainer : Colors.white,
           border: Border.all(
-            color: isSelected ? Colors.black : Colors.grey,
+            color: isSelected ? theme.primaryColor : theme.colorScheme.outline,
             width: isSelected ? 2 : 1,
             strokeAlign: BorderSide.strokeAlignOutside
           ),
@@ -325,16 +352,16 @@ class WalletCard extends StatelessWidget {
             Column(
               children: [
                 Text(
-              title,
-              style: theme.textTheme.bodyMedium!.copyWith(
-                fontWeight: FontWeight.w600
-              )
+                  title,
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600
+                  )
                 ),
                 Text(
-              balance,
-              style: theme.textTheme.bodySmall!.copyWith(
-                color: Colors.grey
-              )
+                  balance,
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant
+                  )
                 ),
               ],
             )

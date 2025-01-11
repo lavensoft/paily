@@ -33,13 +33,26 @@ class AppTheme {
     ),
     //#endregion
 
-    dividerColor: Color.fromRGBO(0, 0, 0, .015),
+    dividerTheme: DividerThemeData(
+      space: 0,
+      thickness: 1,
+      color: Color.fromRGBO(0, 0, 0, .12),
+    ),
 
     colorScheme: ColorScheme.light(
       primary: CupertinoColors.activeBlue,
+      primaryContainer: CupertinoColors.activeBlue.withOpacity(.06),
+
       secondary: CupertinoColors.activeGreen,
 
-      surface: Color.fromRGBO(0, 0, 0, .03)
+      surface: Colors.white,
+
+      onSurface: Colors.black, // Text color
+      onSurfaceVariant: CupertinoColors.systemGrey, //Text color secondary
+      
+      outline: CupertinoColors.systemGrey5,
+
+      surfaceContainerLowest: Color.fromRGBO(0, 0, 0, .03), // Background color secondary
     ),
 
     textTheme: TextTheme(
@@ -73,6 +86,6 @@ class AppTheme {
         fontWeight: FontWeight.w400,
         color: Colors.black,
       )
-    )
+    ),
   );
 }
