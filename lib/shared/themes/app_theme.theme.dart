@@ -53,8 +53,13 @@ class AppTheme {
         color: Colors.black,
       ),
       titleSmall: TextStyle(
-        fontSize: 27,
+        fontSize: 18,
         fontWeight: FontWeight.w500,
+        color: Colors.black,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
         color: Colors.black,
       ),
       bodyMedium: TextStyle(

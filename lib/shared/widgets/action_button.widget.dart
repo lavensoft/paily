@@ -35,7 +35,7 @@ class ActionButton extends StatelessWidget {
         SizedBox(height: 8.0),
         Text(
           label,
-          style: theme.textTheme.bodyMedium!.copyWith(
+          style: theme.textTheme.bodySmall!.copyWith(
             color: Colors.white,
           ),
         ),

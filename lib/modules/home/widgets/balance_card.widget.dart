@@ -37,7 +37,7 @@ class BalanceCard extends StatelessWidget {
           ),
           Text(
             '\$ 1.000,00',
-            style: theme.textTheme.titleLarge!.copyWith(
+            style: theme.textTheme.titleMedium!.copyWith(
               color: Colors.white
             ),
           ),
