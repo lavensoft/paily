@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:paily/modules/payment/views/payment_confirm.view.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
 
@@ -18,7 +20,6 @@ class PaymentAmountInputView extends StatelessWidget {
           appBar: ViewAppBar(
             title: 'Payment amount input',
           ),
-          bottomNavigationBar: bottomBar(context),
           body: Padding(
             padding: AppPaddingTheme.viewPadding,
             child: Column(
@@ -26,6 +27,7 @@ class PaymentAmountInputView extends StatelessWidget {
               children: [
                 bankSelect(context),
                 inputForm(context),
+                bottomBar(context),
               ]
             )
           ),
@@ -37,42 +39,48 @@ class PaymentAmountInputView extends StatelessWidget {
   Widget bottomBar(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Padding(
-      padding: AppPaddingTheme.viewPadding,
-      child: Column(
-        spacing: 21,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Color.fromRGBO(246, 246, 249, 1),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: 15,
-              ),
-              hintText: 'Transaction remark',
-              hintStyle: theme.textTheme.bodyMedium!.copyWith(
-                color: Colors.grey,
-              ),
-              prefixIcon: Icon(
-                HugeIcons.strokeRoundedMessage02
-              )
+    return Column(
+      spacing: 21,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextField(
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Color.fromRGBO(246, 246, 249, 1),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 12,
+              horizontal: 15,
+            ),
+            hintText: 'Transaction remark',
+            hintStyle: theme.textTheme.bodyMedium!.copyWith(
+              color: Colors.grey,
+            ),
+            prefixIcon: Icon(
+              HugeIcons.strokeRoundedMessage02
             ),
           ),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              child: Text('Next'), 
-              onPressed: () {}
-            )
+          onTapOutside: (_) {
+            FocusScope.of(context).unfocus();
+          },
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton(
+            child: Text('Next'), 
+            onPressed: () {
+              Navigator
+                .of(context)
+                .push(
+                  CupertinoPageRoute(builder: (context) => PaymentConfirmView())
+                );
+            }
           )
-        ],
-      )
+        )
+      ],
     );
   }
 
@@ -85,6 +93,7 @@ class PaymentAmountInputView extends StatelessWidget {
         children: [
           Flexible(
             child: TextField(
+              autofocus: true,
               inputFormatters: <TextInputFormatter>[
                 CurrencyTextInputFormatter.currency(
                   locale: 'vi',
@@ -95,13 +104,16 @@ class PaymentAmountInputView extends StatelessWidget {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '0 đ',
-                hintStyle: theme.textTheme.titleSmall!.copyWith(
+                hintStyle: theme.textTheme.titleLarge!.copyWith(
                   color: Colors.grey,
                 ),
                 border: InputBorder.none,
               ),
-              style: theme.textTheme.titleSmall,
+              style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
+              onTapOutside: (_) {
+                FocusScope.of(context).unfocus();
+              },
             ),
           ),
           Text(
