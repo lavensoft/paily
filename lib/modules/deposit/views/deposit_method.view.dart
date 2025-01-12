@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:paily/modules/deposit/views/deposit_bank_transfer.view.dart';
+import 'package:paily/modules/deposit/views/deposit_bank_qr.view.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
@@ -43,7 +43,7 @@ class DepositMethodView extends HookConsumerWidget {
                       .of(context)
                       .push(
                         CupertinoPageRoute(
-                          builder: (context) => DepositBankTransferView(),
+                          builder: (context) => DepositBankQRView(),
                         )
                       );
                   },
