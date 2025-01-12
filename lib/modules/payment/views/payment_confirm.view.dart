@@ -151,7 +151,7 @@ class PaymentConfirmView extends HookConsumerWidget {
                               children: [
                                 Text('Amount'),
                                 Text(
-                                  'VND 20.000 (\$10.00)',
+                                  'VND 250,000 (\$10.00)',
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
