@@ -5,11 +5,26 @@ import 'package:paily/modules/payment/views/payment_account_input.view.dart';
 import 'package:paily/modules/payment/views/payment_amount_input.view.dart';
 import 'package:paily/modules/payment/views/payment_confirm.view.dart';
 import 'package:paily/modules/payment/views/qr_scan.view.dart';
+import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/action_button.widget.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class BalanceCard extends StatelessWidget {
-  const BalanceCard({super.key});
+  const BalanceCard({
+    super.key,
+    this.foreignBalance,
+    this.localBalance,
+    this.foreignCurrencySymbol,
+    this.localCurrencySymbol,
+    this.loading = false
+  });
+
+  final double? foreignBalance;
+  final double? localBalance;
+  final String? foreignCurrencySymbol;
+  final String? localCurrencySymbol;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +51,24 @@ class BalanceCard extends StatelessWidget {
               ),
             ],
           ),
-          Text(
-            '\$ 1.000,00',
-            style: theme.textTheme.titleMedium!.copyWith(
-              color: Colors.white
-            ),
+          Skeletonizer(
+            enabled: loading,
+            child: Text(
+              '$foreignCurrencySymbol ${FormatHelper.formatNumber(foreignBalance!)}',
+              style: theme.textTheme.titleMedium!.copyWith(
+                color: Colors.white
+              ),
+            )
           ),
-          Text(
-            'VND 23.000.000',
-            style: theme.textTheme.bodyLarge!.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w500
-            ),
+          Skeletonizer(
+            enabled: loading,
+            child: Text(
+              '$localCurrencySymbol ${FormatHelper.formatNumber(localBalance!)}',
+              style: theme.textTheme.bodyLarge!.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w500
+              ),
+            )
           ),
           Expanded(child: Container()),
           Row(
@@ -99,5 +120,4 @@ class BalanceCard extends StatelessWidget {
       ),
     );
   }
-
 }

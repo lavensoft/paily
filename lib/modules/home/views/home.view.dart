@@ -6,6 +6,8 @@ import 'package:paily/modules/home/widgets/mini_app_button.widget.dart';
 import 'package:paily/modules/mini_app/providers/mini_app.provider.dart';
 import 'package:paily/modules/store/providers/store.provider.dart';
 import 'package:paily/modules/store/views/store.view.dart';
+import 'package:paily/modules/wallet/providers/wallet.provider.dart';
+import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/action_banner.widget.dart';
 import 'package:paily/shared/widgets/head_search_bar.widget.dart';
@@ -20,6 +22,7 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final store = ref.watch(storeServiceProvider);
     final miniApp = ref.watch(miniAppServiceProvider);
+    final walletTotalBalance = ref.watch(walletTotalBalanceProvider);
 
     return Scaffold(
       appBar: HomeHeader(),
@@ -34,7 +37,18 @@ class HomeView extends ConsumerWidget {
             SliverToBoxAdapter(
               child: Container(
                 margin: EdgeInsets.only(top: 15),
-                child: BalanceCard(),
+                child: switch(walletTotalBalance) {
+                  AsyncData(:final value) => BalanceCard(
+                    localBalance: value.localBalance,
+                    foreignBalance: value.localBalance,
+                    localCurrencySymbol: value.localCurrencySymbol,
+                    foreignCurrencySymbol: value.foreignCurrencySymbol,
+                  ),
+                  AsyncError() => Text('Error'),
+                  _ => BalanceCard(
+                    loading: true,
+                  ),
+                },
               ),
             ),
             SliverToBoxAdapter(
