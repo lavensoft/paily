@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paily/modules/home/widgets/balance_card.widget.dart';
 import 'package:paily/modules/home/widgets/home_header.widget.dart';
 import 'package:paily/modules/home/widgets/mini_app_button.widget.dart';
-import 'package:paily/modules/store/models/store.model.dart';
 import 'package:paily/modules/store/providers/store.provider.dart';
 import 'package:paily/modules/store/views/store.view.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
@@ -12,7 +11,6 @@ import 'package:paily/shared/widgets/head_search_bar.widget.dart';
 import 'package:paily/shared/widgets/image_card.widget.dart';
 import 'package:paily/shared/widgets/product_card.widget.dart';
 import 'package:paily/shared/widgets/section_group.widget.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
