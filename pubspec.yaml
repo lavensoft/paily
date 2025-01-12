@@ -60,6 +60,7 @@ dependencies:
   hooks_riverpod: ^2.6.1
   local_auth: ^2.3.0
   share_plus: ^10.1.3
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -112,6 +113,7 @@ flutter:
     - assets/images/logos/napas_logo.webp
     - assets/images/logos/vnpay_logo.webp
     - assets/images/logos/zalopay_logo.png
+    - assets/images/app/icon-white.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
