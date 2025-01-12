@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'mini_app.provider.g.dart';
 
-final mokup = [
+final mockup = [
   MiniApp(
     id: '0', 
     name: 'App 1', 
@@ -35,6 +35,6 @@ class MiniAppService extends _$MiniAppService {
   @override
   Future<List<MiniApp>> build() async {
     await Future.delayed(Duration(seconds: 3));
-    return mokup;
+    return mockup;
   }
 }

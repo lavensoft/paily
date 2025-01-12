@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'store.provider.g.dart';
 
-final mokup = [
+final mockup = [
   Store(
     id: '1',
     name: 'Store 1',
@@ -31,6 +31,6 @@ class StoreService extends _$StoreService {
   @override
   Future<List<Store>> build() async {
     await Future.delayed(Duration(seconds: 3));
-    return mokup;
+    return mockup;
   }
 }
