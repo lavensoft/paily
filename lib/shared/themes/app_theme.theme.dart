@@ -17,6 +17,7 @@ class AppTheme {
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
+      surfaceTintColor: Colors.white,
     ),
 
     //#region Buttons

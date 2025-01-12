@@ -1,5 +1,7 @@
 import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:paily/modules/payment/views/payment_account_input.view.dart';
 import 'package:paily/modules/payment/widgets/qr_scan_appbar.widget.dart';
 import 'package:paily/shared/assets/image.asset.dart';
 
@@ -15,18 +17,15 @@ class QRScanView extends StatelessWidget {
           detectionSpeed: DetectionSpeed.noDuplicates,
         ),
         onDetect: (BarcodeCapture capture) {
-          // /// The row string scanned barcode value
-          // final String? scannedValue =
-          //     capture.barcodes.first.rawValue;
-      
-          // /// The `Uint8List` image is only available if `returnImage` is set to `true`.
-          // final Uint8List? image = capture.image;
-      
-          // /// row data of the barcode
-          // final Object? raw = capture.raw;
-      
-          // /// List of scanned barcodes if any
-          // final List<Barcode> barcodes = capture.barcodes;
+          Navigator
+            .of(context)
+            .push(
+              CupertinoPageRoute(
+                builder: (context) {
+                  return PaymentAccountInputView();
+                },
+              )
+            );
         },
         validator: (value) {
           if (value.barcodes.isEmpty) {
@@ -38,22 +37,22 @@ class QRScanView extends StatelessWidget {
           }
 
           //Validate is EMVCO QR Code
-          if (value.barcodes.first.rawValue != null) {
-            final RegExp regExp = RegExp(r'(?:\d{2}\d{2}[A-Za-z0-9]*)');
-            if (!regExp.hasMatch(value.barcodes.first.rawValue!)) {
-              return false;
-            }
-          }
+          // if (value.barcodes.first.rawValue != null) {
+          //   final RegExp regExp = RegExp(r'(?:\d{2}\d{2}[A-Za-z0-9]*)');
+          //   if (!regExp.hasMatch(value.barcodes.first.rawValue!)) {
+          //     return false;
+          //   }
+          // }
 
           return true;
         },
-        borderColor: Colors.transparent,
-        overlayColor: Colors.white,
         appBarBuilder: (context, controller) {
           return QrScanAppBar(
             controller: controller,
           );
         },
+        borderColor: Colors.white,
+        overlayColor: Colors.white,
         bottomSheetBuilder: (context, _) {
           return FittedBox(
             child: Container(
