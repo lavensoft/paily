@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:paily/shared/themes/app_padding.theme.dart';
 
 class ViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ViewAppBar({
@@ -18,32 +17,26 @@ class ViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Padding(
-      padding: AppPaddingTheme.contentPadding.copyWith(
-        top: 0,
-        bottom: 0,
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: Visibility(
+        visible: !hideBackButton,
+        child: IconButton(
+          padding: EdgeInsets.zero,
+          icon: Icon(
+            HugeIcons.strokeRoundedArrowLeft01
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )
       ),
-      child: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: Visibility(
-          visible: !hideBackButton,
-          child: IconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(
-              HugeIcons.strokeRoundedArrowLeft01
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )
-        ),
-        title: Text(
-          title ?? '',
-          style: theme.textTheme.titleSmall,
-        ),
-        actions: actions,
+      title: Text(
+        title ?? '',
+        style: theme.textTheme.titleSmall,
       ),
+      actions: actions,
     );
   }
 
