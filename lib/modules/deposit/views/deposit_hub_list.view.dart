@@ -19,7 +19,7 @@ class DepositHubListView extends HookConsumerWidget {
         child: Scaffold(
           appBar: ViewAppBar(),
           body: Padding(
-            padding: AppPaddingTheme.viewPadding,
+            padding: AppPaddingTheme.contentPadding,
             child: ListView.separated(
               itemCount: 6,
               separatorBuilder: (context, index) => SizedBox(height: 12),

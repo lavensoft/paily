@@ -32,7 +32,7 @@ class PaymentConfirmView extends HookConsumerWidget {
             title: 'Payment Confirm',
           ),
           bottomNavigationBar: Container(
-            padding: AppPaddingTheme.viewPadding.copyWith(
+            padding: AppPaddingTheme.contentPadding.copyWith(
               top: 0,
               bottom: 0,
             ),
@@ -98,7 +98,7 @@ class PaymentConfirmView extends HookConsumerWidget {
             ),
           ),
           body: Padding(
-            padding: AppPaddingTheme.viewPadding,
+            padding: AppPaddingTheme.contentPadding,
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -239,7 +239,7 @@ class PaymentConfirmView extends HookConsumerWidget {
                                           context: context, 
                                           builder: (context) {
                                             return Container(
-                                              padding: AppPaddingTheme.viewPadding,
+                                              padding: AppPaddingTheme.contentPadding,
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [

@@ -21,7 +21,7 @@ class PaymentAmountInputView extends StatelessWidget {
             title: 'Payment amount input',
           ),
           body: Padding(
-            padding: AppPaddingTheme.viewPadding,
+            padding: AppPaddingTheme.contentPadding,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

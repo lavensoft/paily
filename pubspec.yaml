@@ -119,6 +119,7 @@ flutter:
     - assets/images/logos/bsc_chain_logo.png
     - assets/images/logos/eth_chain_logo.png
     - assets/images/app/icon-white.png
+    - assets/images/cards/card.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

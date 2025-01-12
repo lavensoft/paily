@@ -33,7 +33,7 @@ class DepositBankQRView extends HookConsumerWidget {
           ),
           body: Center(
             child: Padding(
-              padding: AppPaddingTheme.viewPadding,
+              padding: AppPaddingTheme.contentPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

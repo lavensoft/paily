@@ -33,7 +33,7 @@ class PaymentResultView extends HookConsumerWidget {
             ],
           ),
           bottomNavigationBar: Padding(
-            padding: AppPaddingTheme.viewPadding.copyWith(
+            padding: AppPaddingTheme.contentPadding.copyWith(
               top: 0,
               bottom: 0,
             ),
@@ -51,7 +51,7 @@ class PaymentResultView extends HookConsumerWidget {
             ),
           ),
           body: Padding(
-            padding: AppPaddingTheme.viewPadding,
+            padding: AppPaddingTheme.contentPadding,
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(

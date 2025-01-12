@@ -10,7 +10,7 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: Padding(
-        padding: AppPaddingTheme.viewPadding.copyWith(
+        padding: AppPaddingTheme.contentPadding.copyWith(
           top: 0,
           bottom: 0,
         ),
@@ -19,7 +19,7 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 200,
       actions: [
         Padding(
-          padding: AppPaddingTheme.viewPadding.copyWith(
+          padding: AppPaddingTheme.contentPadding.copyWith(
             top: 0,
             bottom: 0,
           ),

@@ -11,14 +11,13 @@ import 'package:paily/shared/widgets/action_button.widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class BalanceCard extends StatelessWidget {
-  const BalanceCard({
-    super.key,
-    this.foreignBalance,
-    this.localBalance,
-    this.foreignCurrencySymbol,
-    this.localCurrencySymbol,
-    this.loading = false
-  });
+  const BalanceCard(
+      {super.key,
+      this.foreignBalance,
+      this.localBalance,
+      this.foreignCurrencySymbol,
+      this.localCurrencySymbol,
+      this.loading = false});
 
   final double? foreignBalance;
   final double? localBalance;
@@ -34,7 +33,18 @@ class BalanceCard extends StatelessWidget {
       padding: EdgeInsets.all(21),
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: AppRadiusTheme.containerRadius
+        borderRadius: AppRadiusTheme.containerRadius,
+        image: DecorationImage(
+          image: AssetImage('assets/images/cards/card.png'),
+          fit: BoxFit.cover,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.3),
+            offset: Offset(0, 6),
+            blurRadius: 12,
+          ),
+        ]
       ),
       height: 240,
       child: Column(
@@ -45,31 +55,25 @@ class BalanceCard extends StatelessWidget {
             children: [
               Text(
                 'Total balance',
-                style: theme.textTheme.bodyLarge!.copyWith(
-                  color: Color.fromRGBO(174, 174, 174, 1)
-                ),
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: Color.fromRGBO(174, 174, 174, 1)),
               ),
             ],
           ),
           Skeletonizer(
-            enabled: loading,
-            child: Text(
-              '$foreignCurrencySymbol ${FormatHelper.formatNumber(foreignBalance ?? 0)}',
-              style: theme.textTheme.titleMedium!.copyWith(
-                color: Colors.white
-              ),
-            )
-          ),
+              enabled: loading,
+              child: Text(
+                '$foreignCurrencySymbol ${FormatHelper.formatNumber(foreignBalance ?? 0)}',
+                style:
+                    theme.textTheme.titleMedium!.copyWith(color: Colors.white),
+              )),
           Skeletonizer(
-            enabled: loading,
-            child: Text(
-              '$localCurrencySymbol ${FormatHelper.formatNumber(localBalance ?? 0)}',
-              style: theme.textTheme.bodyLarge!.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w500
-              ),
-            )
-          ),
+              enabled: loading,
+              child: Text(
+                '$localCurrencySymbol ${FormatHelper.formatNumber(localBalance ?? 0)}',
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
+              )),
           Expanded(child: Container()),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,9 +83,9 @@ class BalanceCard extends StatelessWidget {
                 label: 'Send',
                 onPressed: () {
                   Navigator.push(
-                    context, 
-                    CupertinoPageRoute(builder: (context) => PaymentAccountInputView())
-                  );
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => PaymentAccountInputView()));
                 },
               ),
               ActionButton(
@@ -89,19 +93,17 @@ class BalanceCard extends StatelessWidget {
                 label: 'Deposit',
                 onPressed: () {
                   Navigator.push(
-                    context, 
-                    CupertinoPageRoute(builder: (context) => DepositMethodView())
-                  );
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => DepositMethodView()));
                 },
               ),
               ActionButton(
                 icon: HugeIcons.strokeRoundedQrCode01,
                 label: 'QR Scan',
                 onPressed: () {
-                  Navigator.push(
-                    context, 
-                    CupertinoPageRoute(builder: (context) => QRScanView())
-                  );
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (context) => QRScanView()));
                 },
               ),
               ActionButton(
@@ -109,9 +111,9 @@ class BalanceCard extends StatelessWidget {
                 label: 'Cashback',
                 onPressed: () {
                   Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => PaymentConfirmView())
-                  );
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => PaymentConfirmView()));
                 },
               ),
             ],

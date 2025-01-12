@@ -24,7 +24,7 @@ class DepositMethodView extends HookConsumerWidget {
             title: 'Deposit',
           ),
           body: Padding(
-            padding: AppPaddingTheme.viewPadding,
+            padding: AppPaddingTheme.contentPadding,
             child: ListView(
               children: [
                 ListTile(

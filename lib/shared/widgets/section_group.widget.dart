@@ -4,13 +4,13 @@ import 'package:paily/shared/themes/app_padding.theme.dart';
 class SectionGroup extends StatelessWidget {
   const SectionGroup({
     super.key,
-    required this.title,
+    this.title,
     this.child,
     this.itemBuilder,
     this.itemCount = 0,
   });
 
-  final String title;
+  final String? title;
   final Widget? child;
   final int itemCount;
   final Widget Function(BuildContext, int)? itemBuilder;
@@ -23,11 +23,16 @@ class SectionGroup extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          title,
-          style: theme.textTheme.titleSmall,
+        Visibility(
+          visible: title != null,
+          child: Container(
+            margin: EdgeInsets.only(bottom: 15.0),
+            child: Text(
+              title ?? '',
+              style: theme.textTheme.titleSmall,
+            ),
+          )
         ),
-        SizedBox(height: 15.0), // Add some spacing
         child ?? 
         Flexible(
           child: OverflowBox(
@@ -35,7 +40,7 @@ class SectionGroup extends StatelessWidget {
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              padding: AppPaddingTheme.viewPadding.copyWith(
+              padding: AppPaddingTheme.contentPadding.copyWith(
                 top: 0,
                 bottom: 0,
               ),

@@ -34,7 +34,7 @@ class DepositCryptoQRView extends HookConsumerWidget {
           ),
           body: Center(
             child: Padding(
-              padding: AppPaddingTheme.viewPadding,
+              padding: AppPaddingTheme.contentPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,

@@ -13,7 +13,7 @@ class QrScanAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppPaddingTheme.viewPadding.copyWith(
+      padding: AppPaddingTheme.contentPadding.copyWith(
         top: 0,
         bottom: 0,
       ),

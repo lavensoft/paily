@@ -28,8 +28,8 @@ class MiniAppButton extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: SizedBox(
-                width: 42,
-                height: 42,
+                width: 48,
+                height: 48,
                 child: Visibility(
                   visible: !loading && imageUrl != null,
                   replacement: Container(

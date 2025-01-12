@@ -19,7 +19,7 @@ class ViewAppBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: AppPaddingTheme.viewPadding.copyWith(
+      padding: AppPaddingTheme.contentPadding.copyWith(
         top: 0,
         bottom: 0,
       ),

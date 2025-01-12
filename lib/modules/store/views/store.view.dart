@@ -18,7 +18,7 @@ class StoreView extends StatelessWidget {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: AppPaddingTheme.viewPadding.copyWith(
+          padding: AppPaddingTheme.contentPadding.copyWith(
             top: 0,
             bottom: 0,
           ),
@@ -40,7 +40,7 @@ class StoreView extends StatelessWidget {
       
           SliverToBoxAdapter(
             child: Container(
-              padding: AppPaddingTheme.viewPadding,
+              padding: AppPaddingTheme.contentPadding,
               child: Column(
                 spacing: 3,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class StoreView extends StatelessWidget {
       
           SliverToBoxAdapter(
             child: Container(
-              padding: AppPaddingTheme.viewPadding.copyWith(
+              padding: AppPaddingTheme.contentPadding.copyWith(
                 top: 0,
               ),
               child: Row(

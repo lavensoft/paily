@@ -19,7 +19,7 @@ class PaymentAccountInputView extends StatelessWidget {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  padding: AppPaddingTheme.viewPadding,
+                  padding: AppPaddingTheme.contentPadding,
                   child: Column(
                     children: [
                       PaymentAccountInputForm(),
@@ -28,7 +28,7 @@ class PaymentAccountInputView extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: AppPaddingTheme.viewPadding,
+                padding: AppPaddingTheme.contentPadding,
                 child: SizedBox(
                   width: double.infinity,
                   child: FilledButton(
