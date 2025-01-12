@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paily/modules/home/widgets/balance_card.widget.dart';
 import 'package:paily/modules/home/widgets/home_header.widget.dart';
 import 'package:paily/modules/home/widgets/mini_app_button.widget.dart';
+import 'package:paily/modules/mini_app/providers/mini_app.provider.dart';
 import 'package:paily/modules/store/providers/store.provider.dart';
 import 'package:paily/modules/store/views/store.view.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
@@ -18,6 +19,7 @@ class HomeView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final store = ref.watch(storeServiceProvider);
+    final miniApp = ref.watch(miniAppServiceProvider);
 
     return Scaffold(
       appBar: HomeHeader(),
@@ -52,31 +54,27 @@ class HomeView extends ConsumerWidget {
                 margin: EdgeInsets.only(top: 24),
                 child: SectionGroup(
                   title: 'Services',
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MiniAppButton(
-                        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
-                        label: 'Mini app', 
-                        onTap: () {  },
-                      ),
-                      MiniAppButton(
-                        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
-                        label: 'Mini app', 
-                        onTap: () {  },
-                      ),
-                      MiniAppButton(
-                        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
-                        label: 'Mini app', 
-                        onTap: () {  },
-                      ),
-                      MiniAppButton(
-                        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
-                        label: 'Mini app', 
-                        onTap: () {  },
-                      )
-                    ],
-                  ),
+                  child: switch(miniApp) {
+                    AsyncData(:final value) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: value.map((app) {
+                        return MiniAppButton(
+                          imageUrl: app.iconImageUrl, 
+                          label: app.name, 
+                          onTap: () {  },
+                        );
+                      }).toList(),
+                    ),
+                    AsyncError() => Text('Error'),
+                    _ => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(4, (index) {
+                        return MiniAppButton(
+                          loading: true,
+                        );
+                      }),
+                    ),
+                  },
                 ),
               ),
             ),
