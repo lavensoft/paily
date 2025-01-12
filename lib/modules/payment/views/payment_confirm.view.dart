@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:paily/modules/payment/views/payment_result.view.dart';
 import 'package:paily/modules/payment/widgets/wallet_select_card.widget.dart';
 import 'package:paily/modules/wallet/providers/wallet_asset.provider.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
@@ -55,7 +59,39 @@ class PaymentConfirmView extends HookConsumerWidget {
                   width: double.infinity,
                   child: FilledButton(
                     child: Text('Confirm Payment'),
-                    onPressed: () {},
+                    onPressed: () async {
+                      final LocalAuthentication auth = LocalAuthentication();
+
+                      try {
+                        final bool didAuthenticate = await auth.authenticate(
+                          localizedReason: 'Please authenticate to confirm payment',
+                        );
+
+                        if (didAuthenticate) {
+                          if (context.mounted) {
+                            Navigator
+                              .of(context)
+                              .pushReplacement(
+                                CupertinoPageRoute(
+                                  builder: (context) => PaymentResultView(),
+                                ),
+                              );
+                          }
+                        }
+                      } on PlatformException {
+                        if (context.mounted) {
+                          ScaffoldMessenger
+                            .of(context)
+                            .showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Failed to authenticate. Please try again.',
+                                ),
+                              ),
+                            );
+                        }
+                      }
+                    },
                   ),
                 )
               ],
@@ -127,7 +163,7 @@ class PaymentConfirmView extends HookConsumerWidget {
                               children: [
                                 Text('Send to'),
                                 Text(
-                                  'TRAN QUANG NHAT',
+                                  'PAILY COMPANY LIMITED',
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -150,7 +186,7 @@ class PaymentConfirmView extends HookConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                   Text('Account Number'),
-                                  Text('20782048',
+                                  Text('123456',
                                     style: theme.textTheme.bodyMedium!.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),

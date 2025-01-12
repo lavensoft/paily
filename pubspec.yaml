@@ -59,6 +59,7 @@ dependencies:
   flutter_hooks: ^0.20.5
   hooks_riverpod: ^2.6.1
   local_auth: ^2.3.0
+  share_plus: ^10.1.3
 
 dev_dependencies:
   flutter_test:

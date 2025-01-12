@@ -3,10 +3,16 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 
 class ViewAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const ViewAppBar({super.key, this.actions, this.title});
+  const ViewAppBar({
+    super.key,
+    this.actions,
+    this.title,
+    this.hideBackButton = false
+  });
 
   final List<Widget>? actions;
   final String? title;
+  final bool hideBackButton;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +26,16 @@ class ViewAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            HugeIcons.strokeRoundedArrowLeft01
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        leading: Visibility(
+          visible: !hideBackButton,
+          child: IconButton(
+            icon: Icon(
+              HugeIcons.strokeRoundedArrowLeft01
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
         ),
         title: Text(
           title ?? '',

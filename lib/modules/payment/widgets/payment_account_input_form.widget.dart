@@ -99,22 +99,22 @@ class PaymentAccountInputForm extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Expanded(
+                Expanded(
                 child: TextField(
-                  controller: controller,
+                  controller: controller..text = '123456',
                   style: theme.textTheme.bodyMedium!.copyWith(
-                    color: Colors.black,
+                  color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    hintStyle: theme.textTheme.bodyMedium!.copyWith(
-                      color: Colors.blueGrey,
-                    ),
-                    hintText: 'Account number',
-                    border: InputBorder.none,
+                  hintStyle: theme.textTheme.bodyMedium!.copyWith(
+                    color: Colors.blueGrey,
+                  ),
+                  hintText: 'Account number',
+                  border: InputBorder.none,
                   ),
                   keyboardType: TextInputType.number,
                   onTapOutside: (e) {
-                    FocusScope.of(context).unfocus();
+                  FocusScope.of(context).unfocus();
                   },
                 ),
               ),
@@ -162,6 +162,7 @@ class PaymentAccountInputForm extends StatelessWidget {
             Expanded(
             child: TextField(
               enabled: false,
+              controller: TextEditingController(text: 'PAILY COMPANY LIMITED'),
               style: theme.textTheme.bodyMedium!.copyWith(
               color: Colors.black,
               ),
