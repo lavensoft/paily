@@ -113,6 +113,10 @@ flutter:
     - assets/images/logos/napas_logo.webp
     - assets/images/logos/vnpay_logo.webp
     - assets/images/logos/zalopay_logo.png
+    - assets/images/logos/arb_chain_logo.png
+    - assets/images/logos/base_chain_logo.png
+    - assets/images/logos/bsc_chain_logo.png
+    - assets/images/logos/eth_chain_logo.png
     - assets/images/app/icon-white.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
