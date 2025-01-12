@@ -4,13 +4,6 @@ import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductCard extends StatelessWidget {
-  final String? imageUrl;
-  final String? title;
-  final String? description;
-  final double width;
-  final double height;
-  final bool loading;
-
   const ProductCard({
     super.key,
     this.imageUrl,
@@ -19,7 +12,16 @@ class ProductCard extends StatelessWidget {
     this.width = double.infinity,
     this.height = 300, // Default height
     this.loading = false,
+    this.onTap,
   });
+
+  final String? imageUrl;
+  final String? title;
+  final String? description;
+  final double width;
+  final double height;
+  final bool loading;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,8 @@ class ProductCard extends StatelessWidget {
             borderRadius: AppRadiusTheme.containerRadius,
             color: Colors.white,
           ),
-          child: InkWell(
+          child: GestureDetector(
+            onTap: onTap,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -6,9 +6,9 @@ part 'store.provider.g.dart';
 final mockup = [
   Store(
     id: '1',
-    name: 'Store 1',
-    description: 'Store 1 description',
-    imageUrls: ['https://vietnamhoneymoontravel.com/wp-content/uploads/2021/09/Introduction-to-Danang-The-Most-Livable-City-in-Vietnam.jpg'],
+    name: 'Ba Na Hills',
+    description: 'Stroll and stop for selfies',
+    imageUrls: ['https://vietnam.travel/sites/default/files/inline-images/shutterstock_1346056832.jpg'],
     miniAppUrl: 'https://lavenes.com',
     website: 'https://lavenes.com',
     lat: 0.0,
@@ -16,9 +16,9 @@ final mockup = [
   ),
   Store(
     id: '2',
-    name: 'Store 2',
-    description: 'Store 2 description',
-    imageUrls: ['https://vietnamhoneymoontravel.com/wp-content/uploads/2021/09/Introduction-to-Danang-The-Most-Livable-City-in-Vietnam.jpg'],
+    name: 'Lady Buddha',
+    description: 'Lady Buddha is the best sight in Son Tra Mountain',
+    imageUrls: ['https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/14/44/78/the-lady-buddha.jpg?w=1600&h=900&s=1'],
     miniAppUrl: 'https://lavenes.com',
     website: 'https://lavenes.com',
     lat: 0.0,

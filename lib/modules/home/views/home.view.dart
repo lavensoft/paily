@@ -144,6 +144,14 @@ class HomeView extends ConsumerWidget {
                       title: value[i].name, 
                       description: value[i].description,
                       width: 240,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StoreView(),
+                          ),
+                        );
+                      },
                     );
                   },
                 ),

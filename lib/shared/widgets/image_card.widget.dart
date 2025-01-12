@@ -36,7 +36,7 @@ class ImageCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: AppRadiusTheme.containerRadius,
           ),
-          child: InkWell(
+          child: GestureDetector(
             onTap: onTap,
             child: ClipRRect(
               borderRadius: AppRadiusTheme.containerRadius,
