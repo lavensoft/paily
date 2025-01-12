@@ -1,30 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:paily/modules/payment/widgets/wallet_select_card.widget.dart';
+import 'package:paily/modules/wallet/providers/wallet_asset.provider.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/section_group.widget.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
 
-class PaymentConfirmView extends StatefulWidget {
+class PaymentConfirmView extends HookConsumerWidget {
   const PaymentConfirmView({super.key});
 
   @override
-  _PaymentConfirmViewState createState() => _PaymentConfirmViewState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedCardIndex = useState('');
 
-class _PaymentConfirmViewState extends State<PaymentConfirmView> {
-  int _selectedCardIndex = -1;
-
-  void _onCardSelected(int index) {
-    setState(() {
-      _selectedCardIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
+    final walletAsset = ref.watch(listWalletAssetProvider);
+
     return ColoredBox(
       color: Colors.white,
       child: SafeArea(
@@ -73,20 +68,31 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: 96,
-                    child: SectionGroup(
-                      title: 'Wallet & Card',
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return WalletCard(
-                          index: index,
-                          isSelected: index == _selectedCardIndex,
-                          onSelect: _onCardSelected,
-                          image: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Flogos%2Fmastercard_logo.png?alt=media&token=71a0ff31-9e78-4684-b4f5-3163196a187a',
-                          title: 'USDT',
-                          balance: '100.00',
-                        );
-                      },
-                    ),
+                    child: switch(walletAsset) {
+                      AsyncData(:final value) => SectionGroup(
+                        title: 'Wallet & Card',
+                        itemCount: value.length,
+                        itemBuilder: (context, i) {
+                          return WalletSelectCard(
+                            isSelected: value[i].id == selectedCardIndex.value,
+                            onSelect: () {
+                              selectedCardIndex.value = value[i].id;
+                            },
+                            image: value[i].iconImageUrl,
+                            title: value[i].symbol,
+                            balance: value[i].amount,
+                          );
+                        },
+                      ),
+                      AsyncError() => Text('Error'),
+                      _ => SectionGroup(
+                        title: 'Wallet & Card',
+                        itemCount: 3,
+                        itemBuilder: (context, i) {
+                          return WalletSelectCard(loading: true);
+                        },
+                      ),
+                    },
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -289,78 +295,6 @@ class _PaymentConfirmViewState extends State<PaymentConfirmView> {
           //     ],
           //   ),
           // ),
-        ),
-      ),
-    );
-  }
-}
-
-class WalletCard extends StatelessWidget {
-  final int index;
-  final bool isSelected;
-  final Function(int) onSelect;
-  final String image;
-  final String title;
-  final String balance;
-
-  const WalletCard({
-    super.key, 
-    required this.index,
-    required this.isSelected,
-    required this.onSelect,
-    required this.image,
-    required this.title,
-    required this.balance,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: () => onSelect(index),
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 9,
-        ),
-        decoration: BoxDecoration(
-          color: isSelected ? theme.colorScheme.primaryContainer : Colors.white,
-          border: Border.all(
-            color: isSelected ? theme.primaryColor : theme.colorScheme.outline,
-            width: isSelected ? 2 : 1,
-            strokeAlign: BorderSide.strokeAlignOutside
-          ),
-          borderRadius: AppRadiusTheme.childRadius,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,  
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 12,
-          children: [
-            CachedNetworkImage(
-              imageUrl: image,
-              width: 30,
-              height: 30,
-            ),
-            Column(
-              children: [
-                Text(
-                  title,
-                  style: theme.textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.w600
-                  )
-                ),
-                Text(
-                  balance,
-                  style: theme.textTheme.bodySmall!.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant
-                  )
-                ),
-              ],
-            )
-          ],
         ),
       ),
     );
