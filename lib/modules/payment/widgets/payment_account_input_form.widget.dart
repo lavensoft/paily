@@ -112,6 +112,10 @@ class PaymentAccountInputForm extends StatelessWidget {
                     hintText: 'Account number',
                     border: InputBorder.none,
                   ),
+                  keyboardType: TextInputType.number,
+                  onTapOutside: (e) {
+                    FocusScope.of(context).unfocus();
+                  },
                 ),
               ),
               if (controller.text.isNotEmpty)
