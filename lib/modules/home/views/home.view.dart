@@ -7,7 +7,6 @@ import 'package:paily/modules/mini_app/providers/mini_app.provider.dart';
 import 'package:paily/modules/store/providers/store.provider.dart';
 import 'package:paily/modules/store/views/store.view.dart';
 import 'package:paily/modules/wallet/providers/wallet.provider.dart';
-import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/action_banner.widget.dart';
 import 'package:paily/shared/widgets/head_search_bar.widget.dart';
