@@ -29,6 +29,7 @@ class ViewAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: Visibility(
           visible: !hideBackButton,
           child: IconButton(
+            padding: EdgeInsets.zero,
             icon: Icon(
               HugeIcons.strokeRoundedArrowLeft01
             ),

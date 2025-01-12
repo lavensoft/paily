@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:paily/modules/deposit/views/deposit_bank_qr.view.dart';
 import 'package:paily/modules/deposit/views/deposit_crypto_qr.view.dart';
+import 'package:paily/modules/deposit/views/deposit_hub_list.view.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
@@ -92,7 +93,13 @@ class DepositMethodView extends HookConsumerWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   onTap: () {
-                    // Handle tile tap
+                    Navigator
+                      .of(context)
+                      .push(
+                        CupertinoPageRoute(
+                          builder: (context) => DepositHubListView(),
+                        )
+                      );
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadiusTheme.childRadius,

@@ -61,6 +61,7 @@ dependencies:
   local_auth: ^2.3.0
   share_plus: ^10.1.3
   qr_flutter: ^4.1.0
+  maps_launcher: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:
