@@ -11,13 +11,8 @@ class PaymentNotifier extends _$PaymentNotifier {
   @override
   WalletTransaction build() => WalletTransaction();
 
-  Future<void> update(WalletTransaction value) async {
-    state = value;
-  }
-
-  Future<void> reset() async {
-    state = WalletTransaction();
-  }
+  @override
+  set state(WalletTransaction newState) => super.state = newState;
 
   Future<void> updateAmount(double amount) async {
     state = state.copyWith(amount: amount);
@@ -27,7 +22,7 @@ class PaymentNotifier extends _$PaymentNotifier {
     state = state.copyWith(note: note);
   }
 
-  Future<void> updateBeneficiary(BankBeneficiary beneficiary) async {
+  Future<void> updateToBank(BankBeneficiary beneficiary) async {
     state = state.copyWith(toBank: beneficiary);
   }
 

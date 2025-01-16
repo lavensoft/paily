@@ -3,16 +3,22 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:paily/modules/bank/models/bank.model.dart';
+import 'package:paily/modules/payment/providers/payment.provider.dart';
 import 'package:paily/modules/payment/views/payment_confirm.view.dart';
+import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
 
-class PaymentAmountInputView extends StatelessWidget {
+class PaymentAmountInputView extends ConsumerWidget {
   const PaymentAmountInputView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final payment = ref.watch(paymentNotifierProvider);
+
     return ColoredBox(
       color: Colors.white,
       child: SafeArea(
@@ -25,9 +31,9 @@ class PaymentAmountInputView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                bankSelect(context),
-                inputForm(context),
-                bottomBar(context),
+                bankSelect(context, payment.toBank!.bank!),
+                inputForm(context, ref),
+                bottomBar(context, ref),
               ]
             )
           ),
@@ -36,7 +42,52 @@ class PaymentAmountInputView extends StatelessWidget {
     );
   }
 
-  Widget bottomBar(BuildContext context) {
+  Widget bankSelect(BuildContext context, Bank bank) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(246, 246, 249, 1),
+        borderRadius: BorderRadius.circular(15)
+      ),
+      child: Row(
+        spacing: 12,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(99),
+            child: CachedNetworkImage(
+              imageUrl: bank.iconImageUrl,
+              width: 48,
+              height: 48,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  bank.shortName, 
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  bank.name, 
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            )
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget bottomBar(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
 
     return Column(
@@ -66,6 +117,11 @@ class PaymentAmountInputView extends StatelessWidget {
           onTapOutside: (_) {
             FocusScope.of(context).unfocus();
           },
+          onChanged: (value) {
+            ref
+              .watch(paymentNotifierProvider.notifier)
+              .updateNote(value);
+          },
         ),
         SizedBox(
           width: double.infinity,
@@ -84,7 +140,7 @@ class PaymentAmountInputView extends StatelessWidget {
     );
   }
 
-  Widget inputForm(BuildContext context) {
+  Widget inputForm(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
 
     return Expanded(
@@ -114,63 +170,38 @@ class PaymentAmountInputView extends StatelessWidget {
               onTapOutside: (_) {
                 FocusScope.of(context).unfocus();
               },
+              onChanged: (value) {
+                if (value.isEmpty) {
+                  ref
+                    .watch(paymentNotifierProvider.notifier)
+                    .updateAmount(0);
+                  return;
+                }
+
+                double amount = double.parse(
+                  value
+                    .replaceAll('đ', '')
+                    .replaceAll('.', '')
+                    .replaceAll(',', '')
+                );
+                ref
+                  .watch(paymentNotifierProvider.notifier)
+                  .updateAmount(amount);
+
+                ref
+                  .watch(paymentNotifierProvider.notifier)
+                  .updateAmountLocalCur(amount / 25400); //!HARDCODE
+              },
             ),
           ),
           Text(
-            '\$ 23.000.000',
+            '≈ \$${
+              FormatHelper.formatNumber(ref.watch(paymentNotifierProvider).amountLocalCur ?? 0)
+            }',
             style: theme.textTheme.bodyLarge,
           )
         ],
       )
-    );
-  }
-
-  Widget bankSelect(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Container(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(246, 246, 249, 1),
-        borderRadius: BorderRadius.circular(15)
-      ),
-      child: Row(
-        spacing: 12,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(99),
-            child: CachedNetworkImage(
-              imageUrl: 'https://ibrand.vn/wp-content/uploads/2022/10/NDTH-Vietcombank-3-min.png',
-              width: 48,
-              height: 48,
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Vietcombank', 
-                  style: theme.textTheme.bodyMedium!.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  'NH THCP Ngoai Thuong VN', 
-                  style: theme.textTheme.bodyMedium!.copyWith(
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            )
-          ),
-          Icon(
-            HugeIcons.strokeRoundedArrowRight01,
-            size: 21,
-          )
-        ],
-      ),
     );
   }
 }
