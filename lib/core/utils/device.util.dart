@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
-class DeviceUtils {
+class DeviceUtil {
   static getId() async {
     var deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) {

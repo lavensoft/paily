@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:paily/shared/themes/app_padding.theme.dart';
 
 class SectionGroup extends StatelessWidget {
   const SectionGroup({
@@ -21,6 +20,7 @@ class SectionGroup extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Visibility(
@@ -36,14 +36,11 @@ class SectionGroup extends StatelessWidget {
         child ?? 
         Flexible(
           child: OverflowBox(
+            alignment: Alignment.topLeft,
             maxWidth: MediaQuery.of(context).size.width,
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              padding: AppPaddingTheme.contentPadding.copyWith(
-                top: 0,
-                bottom: 0,
-              ),
               itemCount: itemCount,
               itemBuilder: itemBuilder!,
               separatorBuilder: (context, index) => SizedBox(width: 12),

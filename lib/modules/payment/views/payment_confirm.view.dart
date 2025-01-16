@@ -115,12 +115,12 @@ class PaymentConfirmView extends HookConsumerWidget {
                               selectedCardIndex.value = value[i].id;
                             },
                             image: value[i].iconImageUrl,
-                            title: value[i].symbol,
+                            title: value[i].name,
                             balance: value[i].amount,
                           );
                         },
                       ),
-                      AsyncError() => Text('Error'),
+                      AsyncError(:final error) => Text(error.toString()),
                       _ => SectionGroup(
                         title: 'Wallet & Card',
                         itemCount: 3,

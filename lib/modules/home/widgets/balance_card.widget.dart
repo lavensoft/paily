@@ -63,14 +63,14 @@ class BalanceCard extends StatelessWidget {
           Skeletonizer(
               enabled: loading,
               child: Text(
-                '$foreignCurrencySymbol ${FormatHelper.formatNumber(foreignBalance ?? 0)}',
+                '$localCurrencySymbol ${FormatHelper.formatNumber(localBalance ?? 0)}',
                 style:
                     theme.textTheme.titleMedium!.copyWith(color: Colors.white),
               )),
           Skeletonizer(
               enabled: loading,
               child: Text(
-                '$localCurrencySymbol ${FormatHelper.formatNumber(localBalance ?? 0)}',
+                '$foreignCurrencySymbol ${FormatHelper.formatNumber(foreignBalance ?? 0)}',
                 style: theme.textTheme.bodyLarge!
                     .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
               )),

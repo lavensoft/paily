@@ -13,6 +13,8 @@ class WalletAsset with _$WalletAsset {
     required String symbol,
     required String name,
     required String iconImageUrl,
+    required String walletId,
+    required bool isPrimary,
   }) = _WalletAsset;
 
   factory WalletAsset.fromJson(Map<String, dynamic> json) => _$WalletAssetFromJson(json);
