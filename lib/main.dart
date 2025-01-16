@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:paily/modules/home/views/home.view.dart';
@@ -16,6 +17,12 @@ void main() async {
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.debug,
   );
+
+  //!FIXME: For MVP
+  var user = FirebaseAuth.instance.currentUser;
+  if (user == null) {
+    await FirebaseAuth.instance.signInAnonymously();
+  }
 
   runApp(ProviderScope(child: const App()));
 }
