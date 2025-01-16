@@ -28,7 +28,7 @@ class PaymentAccountInputView extends ConsumerWidget {
                         onChanged: (value) {
                           ref
                             .read(paymentNotifierProvider.notifier)
-                            .updateBeneficiary(value);
+                            .updateToBank(value);
                         },
                       ),
                     ],
@@ -42,6 +42,7 @@ class PaymentAccountInputView extends ConsumerWidget {
                   child: FilledButton(
                     child: Text('Next'),
                     onPressed: () {
+                      print(ref.read(paymentNotifierProvider).toJson());
                       Navigator
                         .of(context)
                         .push(

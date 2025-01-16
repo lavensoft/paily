@@ -69,7 +69,6 @@ class PaymentAccountInputForm extends HookConsumerWidget {
           )
         ),
         child: Row(
-          spacing: 12,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(99),
@@ -113,7 +112,14 @@ class PaymentAccountInputForm extends HookConsumerWidget {
     }
 
     bank.whenData((value) {
-      selectedBank.value ??= value.first;
+      if (selectedBank.value == null && value.isNotEmpty) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          selectedBank.value = value.first;
+          if (context.mounted) {
+            onSelected(value.first);
+          }
+        });
+      }
     });
 
     return switch(bank) {
@@ -127,6 +133,7 @@ class PaymentAccountInputForm extends HookConsumerWidget {
                 banks: value,
                 onSelected: (selected) {
                   selectedBank.value = selected;
+                  onSelected(selected);
                 },
               );
             },
