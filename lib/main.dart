@@ -13,8 +13,8 @@ void main() async {
   );
 
   await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.playIntegrity,
-    appleProvider: AppleProvider.appAttest,
+    androidProvider: AndroidProvider.debug,
+    appleProvider: AppleProvider.debug,
   );
 
   runApp(ProviderScope(child: const App()));
