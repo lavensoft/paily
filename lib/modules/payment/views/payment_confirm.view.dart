@@ -111,7 +111,7 @@ class PaymentConfirmView extends HookConsumerWidget {
                         itemBuilder: (context, i) {
                           return WalletSelectCard(
                             isSelected: value[i].id == selectedCardIndex.value,
-                            onSelect: () {
+                            onSelected: () {
                               selectedCardIndex.value = value[i].id;
                             },
                             image: value[i].iconImageUrl,

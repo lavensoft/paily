@@ -1,32 +1,22 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:paily/modules/wallet/enums/wallet_asset.enum.dart';
+import 'package:paily/modules/bank/models/bank_beneficiary.model.dart';
+import 'package:paily/modules/wallet/models/wallet_asset.model.dart';
 
 part 'wallet_transaction.model.freezed.dart';
 part 'wallet_transaction.model.g.dart';
 
 @freezed
-class WalletBankTransaction with _$WalletBankTransaction {
-  factory WalletBankTransaction({
-    required String name,
-    required String bankName,
-    required String accountNumber,
-  }) = _WalletBankTransaction;
-
-  factory WalletBankTransaction.fromJson(Map<String, dynamic> json) => _$WalletBankTransactionFromJson(json);
-}
-
-@freezed
 class WalletTransaction with _$WalletTransaction {
   factory WalletTransaction({
-    required String id,
-    required EWalletAsset asset,
-    required double amount,
-    required double localAmount,
-    required WalletBankTransaction toBank,
-    required double fee,
-    required double feeLocal,
-    required double total,
-    required double totalLocal,
+    BankBeneficiary? toBank,
+    WalletAsset? asset,
+    double? amount,
+    double? amountLocalCur,
+    double? fee,
+    double? feeLocalCur,
+    double? total,
+    double? totalLocalCur,
+    String? note,
   }) = _WalletTransaction;
 
   factory WalletTransaction.fromJson(Map<String, dynamic> json) => _$WalletTransactionFromJson(json);

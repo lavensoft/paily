@@ -8,7 +8,7 @@ class WalletSelectCard extends StatelessWidget {
   const WalletSelectCard({
     super.key, 
     this.isSelected = false,
-    this.onSelect,
+    this.onSelected,
     this.image,
     this.title,
     this.balance,
@@ -16,7 +16,7 @@ class WalletSelectCard extends StatelessWidget {
   });
 
   final bool isSelected;
-  final Function()? onSelect;
+  final Function()? onSelected;
   final String? image;
   final String? title;
   final double? balance;
@@ -30,7 +30,7 @@ class WalletSelectCard extends StatelessWidget {
       enabled: loading,
       child: GestureDetector(
         onTap: () {
-          onSelect?.call();
+          onSelected?.call();
         },
         child: Container(
           padding: EdgeInsets.symmetric(
