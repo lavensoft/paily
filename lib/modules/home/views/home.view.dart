@@ -122,7 +122,7 @@ class HomeView extends ConsumerWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
+                          CupertinoPageRoute(
                             builder: (context) => StoreView(store: item,),
                           ),
                         );
@@ -162,7 +162,7 @@ class HomeView extends ConsumerWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
+                          CupertinoPageRoute(
                             builder: (context) => StoreView(store: item,),
                           ),
                         );
@@ -202,7 +202,7 @@ class HomeView extends ConsumerWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => StoreView(store: item,),
                         ),
                       );
@@ -242,7 +242,7 @@ class HomeView extends ConsumerWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => StoreView(store: item,),
                         ),
                       );
