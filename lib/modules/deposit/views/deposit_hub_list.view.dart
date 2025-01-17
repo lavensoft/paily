@@ -21,7 +21,7 @@ class DepositHubListView extends HookConsumerWidget {
           body: Padding(
             padding: AppPaddingTheme.contentPadding,
             child: ListView.separated(
-              itemCount: 6,
+              itemCount: 1,
               separatorBuilder: (context, index) => SizedBox(height: 12),
               itemBuilder: (context, index) => ListTile(
                   leading: Icon(
