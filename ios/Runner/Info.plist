@@ -51,5 +51,10 @@
   <string>We needs photos access to get QR code from photo library</string>
   <key>NSFaceIDUsageDescription</key>
   <string>We need authenticating using face id for confirm payment and login</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>sms</string>
+    <string>tel</string>
+  </array>
 </dict>
 </plist>

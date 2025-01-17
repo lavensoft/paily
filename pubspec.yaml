@@ -66,6 +66,7 @@ dependencies:
   android_id: ^0.4.0
   cloud_firestore: ^5.6.1
   flutter_local_notifications: ^18.0.1
+  webview_flutter: ^4.10.0
 
 dev_dependencies:
   flutter_test:
