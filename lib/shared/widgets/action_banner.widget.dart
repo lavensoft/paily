@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/rounded_button.widget.dart';
 
@@ -64,18 +63,18 @@ class ActionBanner extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(
-          top: 9.0,
-          right: 9.0,
-          child: IconButton(
-            icon: Icon(
-              HugeIcons.strokeRoundedCancel01, 
-              color: Colors.white,
-              size: 18,
-            ),
-            onPressed: onClose,
-          ),
-        ),
+        // Positioned(
+        //   top: 9.0,
+        //   right: 9.0,
+        //   child: IconButton(
+        //     icon: Icon(
+        //       HugeIcons.strokeRoundedCancel01, 
+        //       color: Colors.white,
+        //       size: 18,
+        //     ),
+        //     onPressed: onClose,
+        //   ),
+        // ),
       ],
     );
   }

@@ -30,6 +30,14 @@ class _HeadSearchBarState extends State<HeadSearchBar> {
           ),
           Expanded(
             child: TextField(
+              enabled: false,
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Coming soon'),
+                  ),
+                );
+              },
               controller: _controller,
               decoration: InputDecoration(
                 hintText: 'Search',

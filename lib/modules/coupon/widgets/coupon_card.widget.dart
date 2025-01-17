@@ -39,10 +39,21 @@ class CouponCard extends StatelessWidget {
             Row(
               spacing: 6,
               children: [
-                CachedNetworkImage(
-                  imageUrl: coupon.iconImageUrl ?? '',
+                Container(
                   width: 48,
                   height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: Visibility(
+                    visible: coupon.iconImageUrl != null && coupon.iconImageUrl!.isNotEmpty,
+                    replacement: Icon(
+                      Icons.circle
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: coupon.iconImageUrl ?? '',
+                    ),
+                  ),
                 ),
                 SizedBox(width: 12),
                 Text(

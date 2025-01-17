@@ -1,15 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paily/modules/home/widgets/balance_card.widget.dart';
 import 'package:paily/modules/home/widgets/home_header.widget.dart';
 import 'package:paily/modules/home/widgets/mini_app_button.widget.dart';
 import 'package:paily/modules/mini_app/providers/mini_app.provider.dart';
+import 'package:paily/modules/payment/views/payment_account_input.view.dart';
 import 'package:paily/modules/store/enums/store_type.enum.dart';
 import 'package:paily/modules/store/providers/store.provider.dart';
 import 'package:paily/modules/store/views/store.view.dart';
 import 'package:paily/modules/wallet/providers/wallet.provider.dart';
 import 'package:paily/shared/widgets/action_banner.widget.dart';
-import 'package:paily/shared/widgets/head_search_bar.widget.dart';
 import 'package:paily/shared/widgets/image_card.widget.dart';
 import 'package:paily/shared/widgets/product_card.widget.dart';
 import 'package:paily/shared/widgets/section_group.widget.dart';
@@ -29,9 +30,9 @@ class HomeView extends ConsumerWidget {
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          SliverSection(
-            child: HeadSearchBar()
-          ),
+          // SliverSection(
+          //   child: HeadSearchBar()
+          // ),
           SliverSection(
             child: Container(
               margin: EdgeInsets.only(top: 15),
@@ -56,7 +57,15 @@ class HomeView extends ConsumerWidget {
                 title: 'Say hello to USDC',
                 description: 'Now you can top up and pay through USDC quickly and easily',
                 onClose: () {},
-                onTryItOut: () {},
+                onTryItOut: () {
+                  Navigator
+                    .of(context)
+                    .push(
+                      CupertinoPageRoute(
+                        builder: (context) => PaymentAccountInputView(),
+                      )
+                    );
+                },
                 backgroundImage: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fbanners%2FUSDC%20Banner.png?alt=media&token=6d3eecab-9fb4-4e5c-8ce1-d19f2f8742fa',
               ),
             ),

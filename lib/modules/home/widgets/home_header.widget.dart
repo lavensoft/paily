@@ -30,7 +30,13 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
               weight: 3,
               size: 21,
             ),
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Coming soon'),
+                ),
+              );
+            },
           ),
         ),
       ],
