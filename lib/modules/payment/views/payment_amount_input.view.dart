@@ -198,4 +198,49 @@ class PaymentAmountInputView extends ConsumerWidget {
       )
     );
   }
+
+  // KeyboardActionsConfig _buildConfig(BuildContext context) {
+  //   final FocusNode _amountNode = FocusNode();
+
+  //   return KeyboardActionsConfig(
+  //     keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
+  //     keyboardBarColor: Colors.grey[200],
+  //     nextFocus: true,
+  //     actions: [
+  //         KeyboardActionsItem(
+  //         focusNode: _amountNode,
+  //         toolbarButtons: [
+  //           //button 1
+  //           (node) {
+  //             return GestureDetector(
+  //               onTap: () => node.unfocus(),
+  //               child: Container(
+  //                 color: Colors.white,
+  //                 padding: EdgeInsets.all(8.0),
+  //                 child: Text(
+  //                   "CLOSE",
+  //                   style: TextStyle(color: Colors.black),
+  //                 ),
+  //               ),
+  //             );
+  //           },
+  //           //button 2
+  //           (node) {
+  //             return GestureDetector(
+  //               onTap: () => node.unfocus(),
+  //               child: Container(
+  //                 color: Colors.black,
+  //                 padding: EdgeInsets.all(8.0),
+  //                 child: Text(
+  //                   "DONE",
+  //                   style: TextStyle(color: Colors.white),
+  //                 ),
+  //               ),
+  //             );
+  //           }
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 }
