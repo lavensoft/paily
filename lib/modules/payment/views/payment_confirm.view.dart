@@ -5,9 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:paily/modules/payment/providers/payment.provider.dart';
 import 'package:paily/modules/payment/views/payment_result.view.dart';
 import 'package:paily/modules/payment/widgets/wallet_select_card.widget.dart';
 import 'package:paily/modules/wallet/providers/wallet_asset.provider.dart';
+import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/section_group.widget.dart';
@@ -23,6 +25,7 @@ class PaymentConfirmView extends HookConsumerWidget {
     final theme = Theme.of(context);
     
     final walletAsset = ref.watch(listWalletAssetProvider);
+    final payment = ref.watch(paymentNotifierProvider);
 
     return ColoredBox(
       color: Colors.white,
@@ -47,7 +50,7 @@ class PaymentConfirmView extends HookConsumerWidget {
                     ),
                     Spacer(),
                     Text(
-                      '\$10.2',
+                      '\$${FormatHelper.formatNumber(payment.totalLocalCur ?? 0)}',
                       style: theme.textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -151,7 +154,11 @@ class PaymentConfirmView extends HookConsumerWidget {
                               children: [
                                 Text('Amount'),
                                 Text(
-                                  'VND 250,000 (\$10.00)',
+                                  'VND ${
+                                    FormatHelper.formatNumber(payment.amount ?? 0)
+                                  } (\$${
+                                    FormatHelper.formatNumber(payment.amountLocalCur ?? 0)
+                                  })',
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -163,7 +170,33 @@ class PaymentConfirmView extends HookConsumerWidget {
                               children: [
                                 Text('Send to'),
                                 Text(
-                                  'PAILY COMPANY LIMITED',
+                                  payment.toBank?.accountName ?? '',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Bank'),
+                                Text(
+                                  '${payment.toBank?.bank?.name}\n(${payment.toBank?.bank?.shortName})',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Account Number'),
+                                Text(
+                                  payment.toBank?.accountNumber ?? '',
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -173,47 +206,42 @@ class PaymentConfirmView extends HookConsumerWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                  Text('Bank'),
-                                  Text(
-                                    'Vietcombank',
-                                    style: theme.textTheme.bodyMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                Text('Remark'),
+                                Text(
+                                  payment.note ?? '',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
                                   ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                  Text('Account Number'),
-                                  Text('123456',
-                                    style: theme.textTheme.bodyMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
+                                ),
                               ],
                             ),
                             Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                  Text('Fee (2%)'),
-                                  Text('\$0.2',
-                                    style: theme.textTheme.bodyMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                Text('Fee (2%)'),
+                                Text(
+                                  '\$${
+                                    FormatHelper.formatNumber(payment.feeLocalCur ?? 0)
+                                  }',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
                                   ),
+                                ),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                  Text('Total'),
-                                  Text('\$10.2',
-                                    style: theme.textTheme.bodyMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                Text('Total'),
+                                Text(
+                                  '\$${
+                                    FormatHelper.formatNumber(payment.totalLocalCur ?? 0)
+                                  }',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
                                   ),
+                                ),
                               ],
                             ),
                             Container(

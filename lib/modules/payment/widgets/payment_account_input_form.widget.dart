@@ -238,6 +238,8 @@ class PaymentAccountInputForm extends HookConsumerWidget {
                 hintText: 'Account name',
                 border: InputBorder.none,
               ),
+              keyboardType: TextInputType.text,
+              textCapitalization: TextCapitalization.characters,
               onTapOutside: (e) {
                 FocusScope.of(context).unfocus();
               },
