@@ -1,4 +1,4 @@
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:paily/core/utils/notification.util.dart';
 import 'package:paily/modules/bank/models/bank_beneficiary.model.dart';
 import 'package:paily/modules/coupon/models/coupon.model.dart';
 import 'package:paily/modules/wallet/models/wallet_asset.model.dart';
@@ -46,7 +46,8 @@ class PaymentNotifier extends _$PaymentNotifier {
   applyCoupon(Coupon coupon) {
     state = state.copyWith(coupons: (state.coupons ?? [])..add(coupon));
 
-    double totalDiscountRate = state.coupons!.fold(0, (previousValue, element) => previousValue + element.discountRate!);
+    double totalDiscountRate = state.coupons!.fold(
+        0, (previousValue, element) => previousValue + element.discountRate!);
     double discount = state.amount! * totalDiscountRate;
     double total = state.amount! + state.fee!;
 
@@ -61,19 +62,19 @@ class PaymentNotifier extends _$PaymentNotifier {
   }
 
   confirmPayment() async {
-    final asset = await ref.watch(walletAssetNotifierProvider.notifier).decreaseBalance(state.asset!.id, state.totalLocalCur!);
+    final asset = await ref
+        .watch(walletAssetNotifierProvider.notifier)
+        .decreaseBalance(state.asset!.id, state.totalLocalCur!);
     final remainingBalance = asset.amount;
 
     //Send local notification
-    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    await flutterLocalNotificationsPlugin.show( 
-      0, 
-      'Transfer successfully!', 
-      'You have successfully sent \$${
+    await NotificationUtil().showNotification(
+      title: 'Transfer successfully!',
+      body: 'You have successfully sent \$${
         FormatHelper.formatNumber(state.totalLocalCur)
       }, the remaining balance: \$${
         FormatHelper.formatNumber(remainingBalance)
-      }', null
+      }'
     );
   }
 }
