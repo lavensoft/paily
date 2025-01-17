@@ -4,6 +4,7 @@ import 'package:paily/modules/home/widgets/balance_card.widget.dart';
 import 'package:paily/modules/home/widgets/home_header.widget.dart';
 import 'package:paily/modules/home/widgets/mini_app_button.widget.dart';
 import 'package:paily/modules/mini_app/providers/mini_app.provider.dart';
+import 'package:paily/modules/store/enums/store_type.enum.dart';
 import 'package:paily/modules/store/providers/store.provider.dart';
 import 'package:paily/modules/store/views/store.view.dart';
 import 'package:paily/modules/wallet/providers/wallet.provider.dart';
@@ -95,19 +96,20 @@ class HomeView extends ConsumerWidget {
               margin: EdgeInsets.only(top: 24),
               child: switch(store) {
                 AsyncData(:final value) => SectionGroup(
-                  title: 'Services',
-                  itemCount: value.length,
+                  title: 'Landscape',
+                  itemCount: value.where((item) => item.type == EStoreType.landscape).length,
                   itemBuilder: (context, i) {
+                    final item = value.where((item) => item.type == EStoreType.landscape).toList()[i];
                     return ImageCard(
-                      imageUrl: value[i].imageUrls[0], 
-                      title: value[i].name, 
-                      description: value[i].description,
+                      imageUrl: item.imageUrls[0], 
+                      title: item.name, 
+                      description: item.description,
                       width: 240,
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => StoreView(),
+                            builder: (context) => StoreView(store: item,),
                           ),
                         );
                       },
@@ -134,19 +136,60 @@ class HomeView extends ConsumerWidget {
               margin: EdgeInsets.only(top: 24),
               child: switch(store) {
                 AsyncData(:final value) => SectionGroup(
-                title: 'Services',
-                itemCount: value.length,
+                  title: 'Park',
+                  itemCount: value.where((item) => item.type == EStoreType.park).length,
+                  itemBuilder: (context, i) {
+                    final item = value.where((item) => item.type == EStoreType.park).toList()[i];
+                    return ImageCard(
+                      imageUrl: item.imageUrls[0], 
+                      title: item.name, 
+                      description: item.description,
+                      width: 240,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StoreView(store: item,),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                AsyncError() => Text('Error'),
+                _ => SectionGroup(
+                  title: 'Services',
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return ImageCard(
+                      loading: true,
+                      width: 240,
+                    );
+                  },
+                ),
+              },
+            ),
+          ),
+          SliverSection(
+            child: Container(
+              height: 300,
+              margin: EdgeInsets.only(top: 24),
+              child: switch(store) {
+                AsyncData(:final value) => SectionGroup(
+                title: 'Hotel',
+                itemCount: value.where((item) => item.type == EStoreType.hotel).length,
                 itemBuilder: (context, i) {
+                    final item = value.where((item) => item.type == EStoreType.hotel).toList()[i];
                   return ProductCard(
-                    imageUrl: value[i].imageUrls[0], 
-                    title: value[i].name, 
-                    description: value[i].description,
+                    imageUrl: item.imageUrls[0], 
+                    title: item.name, 
+                    description: item.description,
                     width: 240,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => StoreView(),
+                          builder: (context) => StoreView(store: item,),
                         ),
                       );
                     },
@@ -155,7 +198,47 @@ class HomeView extends ConsumerWidget {
               ),
                 AsyncError() => Text('Error'),
                 _ => SectionGroup(
-                  title: 'Services',
+                  title: 'Hotel',
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                      loading: true,
+                      width: 240,
+                    );
+                  },
+                ),
+              },
+            ),
+          ),
+          SliverSection(
+            child: Container(
+              height: 300,
+              margin: EdgeInsets.only(top: 24),
+              child: switch(store) {
+                AsyncData(:final value) => SectionGroup(
+                title: 'Restaurant',
+                itemCount: value.where((item) => item.type == EStoreType.restaurant).length,
+                itemBuilder: (context, i) {
+                    final item = value.where((item) => item.type == EStoreType.restaurant).toList()[i];
+                  return ProductCard(
+                    imageUrl: item.imageUrls[0], 
+                    title: item.name, 
+                    description: item.description,
+                    width: 240,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StoreView(store: item,),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+                AsyncError() => Text('Error'),
+                _ => SectionGroup(
+                  title: 'Restaurant',
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return ProductCard(

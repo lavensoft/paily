@@ -14,7 +14,7 @@ final mockup = [
     lat: 16.099652,
     lng: 108.277082,
     address: 'Lam Thi Ni Garden, Hoang Sa, Tho Quang, Son Tra, Da Nang, Vietnam', 
-    type: EStoreType.location,
+    type: EStoreType.landscape,
   ),
   Store(
     id: '2',
@@ -24,7 +24,7 @@ final mockup = [
     lat: 16.0612215,
     lng: 108.2296818, 
     address: 'Nguyen Van Linh, Phuoc Ninh, Hai Chau, Da Nang, Vietnam', 
-    type: EStoreType.location,
+    type: EStoreType.landscape,
   ),
   Store(
     id: '3',
@@ -109,7 +109,7 @@ final mockup = [
   ),
   Store(
     id: '6',
-    name: 'Hyatt Regency Danang Resort & Spa',
+    name: 'Hyatt Regency Danang Resort',
     description: 'Hyatt Regency Danang Resort & Spa',
     imageUrls: ['https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/2a/a0/36/beach.jpg?w=1400&h=-1&s=1'],
     miniAppUrl: 'https://lavenes.com',
@@ -144,7 +144,7 @@ final mockup = [
     lat: 16.05567036220949,
     lng: 108.24307611538197, 
     address: '193 Nguyen Van Thoai, An Hai Dong, Ngu Hanh Son, Da Nang, Viet Nam', 
-    type: EStoreType.kitchen,
+    type: EStoreType.restaurant,
     priceFromLocalCur: 60,
     services: [
       StoreProduct(
@@ -165,7 +165,7 @@ final mockup = [
     lat: 15.982626298258097,
     lng: 108.27980262694615,
     address: '35 Truong Sa Street, Hoa Hai Ward, Ngu Hanh Son District, Danang, Danang, Quang Nam', 
-    type: EStoreType.kitchen,
+    type: EStoreType.restaurant,
     priceFromLocalCur: 23,
     services: [
       StoreProduct(

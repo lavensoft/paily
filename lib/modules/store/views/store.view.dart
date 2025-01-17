@@ -2,12 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:maps_launcher/maps_launcher.dart';
+import 'package:paily/modules/store/enums/store_type.enum.dart';
+import 'package:paily/modules/store/models/store.model.dart';
+import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/inline_button.widget.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
 
 class StoreView extends StatelessWidget {
-  const StoreView({super.key});
+  const StoreView({super.key, required this.store});
+
+  final Store store;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +21,7 @@ class StoreView extends StatelessWidget {
 
     return Scaffold(
       appBar: ViewAppBar(
-        title: 'Ba Na Hills',
+        title: store.name,
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
@@ -24,7 +30,15 @@ class StoreView extends StatelessWidget {
           ),
           child: FilledButton(
             onPressed: () {}, 
-            child: Text('Booking from \$10.00'),
+            child: Text(
+              switch(store.type) {
+                EStoreType.landscape => 'Navigate',
+                EStoreType.park => 'Buy ticket',
+                EStoreType.hotel => 'Book now',
+                EStoreType.restaurant => 'Book now',
+              } +
+              (store.priceFromLocalCur != null ? ' from \$${FormatHelper.formatNumber(store.priceFromLocalCur)}' : ''),
+            ),
           ),
         ),
       ),
@@ -32,7 +46,7 @@ class StoreView extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child:  CachedNetworkImage(
-              imageUrl: 'https://vietnam.travel/sites/default/files/inline-images/shutterstock_1346056832.jpg',
+              imageUrl: store.imageUrls[0],
               height: 390,
               fit: BoxFit.cover,
             ),
@@ -48,9 +62,11 @@ class StoreView extends StatelessWidget {
                   Row(
                     spacing: 9,
                     children: [
-                      Text(
-                        'Ba Na Hills',
-                        style: theme.textTheme.titleMedium,
+                      Flexible(
+                        child: Text(
+                          store.name,
+                          style: theme.textTheme.titleMedium,
+                        ),
                       ),
                       Badge(
                         label: Text('Openning'),
@@ -60,7 +76,7 @@ class StoreView extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'Theme parks may not be to every traveller’s taste. But Ba Na Hills is a must-visit for everyone. The French village is a replica of a medieval town, complete with European-style buildings, an impressive cathedral, and a quaint village square.',
+                    store.description,
                     style: theme.textTheme.bodyMedium!.copyWith(  
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
@@ -78,23 +94,29 @@ class StoreView extends StatelessWidget {
               child: Row(
                 spacing: 12,
                 children: [
-                  Expanded(
-                    child: InlineButton(
-                      onPressed: () {}, 
-                      label: Text('Mini-app'),
-                      icon: Icon(
-                        HugeIcons.strokeRoundedWebDesign01
-                      ),
-                    )
+                  Visibility(
+                    visible: store.miniAppUrl != null,
+                    child: Expanded(
+                      child: InlineButton(
+                        onPressed: () {}, 
+                        label: Text('Mini-app'),
+                        icon: Icon(
+                          HugeIcons.strokeRoundedWebDesign01
+                        ),
+                      )
+                    ),
                   ),
-                  Expanded(
-                    child: InlineButton(
-                      onPressed: () {}, 
-                      label: Text('Website'),
-                      icon: Icon(
-                        HugeIcons.strokeRoundedGlobe02
-                      ),
-                    )
+                  Visibility(
+                    visible: store.website != null,
+                    child: Expanded(
+                      child: InlineButton(
+                        onPressed: () {}, 
+                        label: Text('Website'),
+                        icon: Icon(
+                          HugeIcons.strokeRoundedGlobe02
+                        ),
+                      )
+                    ),
                   ),
                 ],
               ),
@@ -117,23 +139,23 @@ class StoreView extends StatelessWidget {
                       HugeIcons.strokeRoundedWifi01,
                       size: 21,
                     ),
-                    title: Text('Wifi'),
+                    title: Text('Free Internet'),
                   ),
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: Icon(
-                      HugeIcons.strokeRoundedKitchenUtensils,
+                      HugeIcons.strokeRoundedParkingAreaSquare,
                       size: 21,
                     ),
-                    title: Text('Kitchen'),
+                    title: Text('Free parking'),
                   ),
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: Icon(
-                      HugeIcons.strokeRoundedLaptop,
+                      HugeIcons.strokeRoundedCreditCard,
                       size: 21,
                     ),
-                    title: Text('Private space to work'),
+                    title: Text('Accept credit card'),
                   )
                 ],
               ),
@@ -147,36 +169,36 @@ class StoreView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Services',
-                    style: theme.textTheme.titleMedium,
+                  switch(store.type) {
+                    EStoreType.landscape => 'Service',
+                    EStoreType.park => 'Service',
+                    EStoreType.hotel => 'Room',
+                    EStoreType.restaurant => 'Menu',
+                  },
+                  style: theme.textTheme.titleMedium,
                   ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(9),
-                      child: CachedNetworkImage(
-                        imageUrl: 'https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-superJumbo.jpg',
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: store.services?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      final item =  store.services![index];
+
+                      return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(9),
+                        child: CachedNetworkImage(
+                        imageUrl: item.imageUrl,
                         width: 63,
                         height: 63,
                         fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    title: Text('King Room'),
-                    subtitle: Text('\$10.00'),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(9),
-                      child: CachedNetworkImage(
-                        imageUrl: 'https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-superJumbo.jpg',
-                        width: 63,
-                        height: 63,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    title: Text('King Room'),
-                    subtitle: Text('\$10.00'),
+                      title: Text(item.name),
+                      subtitle: Text('\$${item.priceLocalCur}'),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -195,16 +217,21 @@ class StoreView extends StatelessWidget {
                     style: theme.textTheme.titleMedium,
                   ),
                   Text(
-                    '15 Nai Nghia 1',
+                    store.address,
                     style: theme.textTheme.bodyMedium!.copyWith(  
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  FilledButton.tonalIcon(
-                    onPressed: () {}, 
-                    label: Text('Navigate'),
-                    icon: Icon(
-                      HugeIcons.strokeRoundedNavigation01
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.tonalIcon(
+                      onPressed: () async {
+                        await MapsLauncher.launchCoordinates(store.lat, store.lng);
+                      }, 
+                      label: Text('Navigate'),
+                      icon: Icon(
+                        HugeIcons.strokeRoundedNavigation01
+                      ),
                     ),
                   )
                 ],

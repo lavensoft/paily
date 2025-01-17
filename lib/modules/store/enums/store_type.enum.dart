@@ -1,6 +1,6 @@
 enum EStoreType {
-  location,
-  kitchen,
+  landscape,
+  restaurant,
   hotel,
   park,
 }
