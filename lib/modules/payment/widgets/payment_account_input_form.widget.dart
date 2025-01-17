@@ -1,22 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:paily/modules/bank/models/bank.model.dart';
 import 'package:paily/modules/bank/models/bank_beneficiary.model.dart';
 import 'package:paily/modules/bank/providers/bank.provider.dart';
+import 'package:paily/modules/payment/providers/payment.provider.dart';
 import 'package:paily/modules/payment/widgets/bank_select_bottom_sheet.widget.dart';
+import 'package:paily/modules/wallet/models/wallet_transaction.model.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class PaymentAccountInputForm extends HookConsumerWidget {
-  const PaymentAccountInputForm({super.key, this.onChanged});
-
-  final Function(BankBeneficiary)? onChanged;
+  const PaymentAccountInputForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final beneficiary = useState<BankBeneficiary>(BankBeneficiary());
+    final paymentNotifier = ref.watch(paymentNotifierProvider.notifier);
+    final payment = ref.watch(paymentNotifierProvider);
 
     return Column(
       spacing: 3,
@@ -24,33 +23,26 @@ class PaymentAccountInputForm extends HookConsumerWidget {
         bankSelect(
           context, 
           ref,
-          (selected) {
-            beneficiary.value = beneficiary.value.copyWith(bank: selected);
-            onChanged?.call(beneficiary.value);
-          },
+          paymentNotifier,
+          payment,
         ),
         numberInput(
           context,
-          (value) {
-            beneficiary.value = beneficiary.value.copyWith(accountNumber: value);
-            onChanged?.call(beneficiary.value);
-          },
+          paymentNotifier,
+          payment,
         ),
         nameInput(
           context,
-          (value) {
-            beneficiary.value = beneficiary.value.copyWith(accountName: value);
-            onChanged?.call(beneficiary.value);
-          },
+          paymentNotifier,
+          payment,
         ),
       ],
     );
   }
 
-  Widget bankSelect(BuildContext context, WidgetRef ref, Function(Bank) onSelected) {
+  Widget bankSelect(BuildContext context, WidgetRef ref, PaymentNotifier paymentNotifier, WalletTransaction payment) {
     final theme = Theme.of(context);
     final bank = ref.watch(listBankProvider);
-    final selectedBank = useState<Bank?>(null);
 
     Widget input(
       String imageUrl,
@@ -69,6 +61,7 @@ class PaymentAccountInputForm extends HookConsumerWidget {
           )
         ),
         child: Row(
+          spacing: 12,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(99),
@@ -112,12 +105,11 @@ class PaymentAccountInputForm extends HookConsumerWidget {
     }
 
     bank.whenData((value) {
-      if (selectedBank.value == null && value.isNotEmpty) {
+      if (payment.toBank?.bank == null && value.isNotEmpty) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          selectedBank.value = value.first;
-          if (context.mounted) {
-            onSelected(value.first);
-          }
+          paymentNotifier.updateToBank(
+            payment.toBank?.copyWith(bank: value.first) ?? BankBeneficiary(bank: value.first)
+          );
         });
       }
     });
@@ -132,17 +124,18 @@ class PaymentAccountInputForm extends HookConsumerWidget {
               return BankSelectBottomSheet(
                 banks: value,
                 onSelected: (selected) {
-                  selectedBank.value = selected;
-                  onSelected(selected);
+                  paymentNotifier.updateToBank(
+                    payment.toBank?.copyWith(bank: selected) ?? BankBeneficiary(bank: selected)
+                  );
                 },
               );
             },
           );
         },
         child: input(
-          selectedBank.value?.iconImageUrl ?? '',
-          selectedBank.value?.shortName ?? '',
-          selectedBank.value?.name ?? '',
+          payment.toBank?.bank?.iconImageUrl ?? '',
+          payment.toBank?.bank?.shortName ?? '',
+          payment.toBank?.bank?.name ?? '',
         ),
       ),
       _ => Skeletonizer(
@@ -151,7 +144,7 @@ class PaymentAccountInputForm extends HookConsumerWidget {
     };
   }
 
-  Widget numberInput(BuildContext context, Function(String)? onChanged) {
+  Widget numberInput(BuildContext context, PaymentNotifier paymentNotifier, WalletTransaction payment) {
     final theme = Theme.of(context);
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
@@ -175,6 +168,7 @@ class PaymentAccountInputForm extends HookConsumerWidget {
             children: [
                 Expanded(
                 child: TextField(
+                  controller: TextEditingController(text: payment.toBank?.accountNumber),
                   style: theme.textTheme.bodyMedium!.copyWith(
                     color: Colors.black,
                   ),
@@ -190,7 +184,9 @@ class PaymentAccountInputForm extends HookConsumerWidget {
                     FocusScope.of(context).unfocus();
                   },
                   onChanged: (value) {
-                    onChanged?.call(value);
+                    paymentNotifier.updateToBank(
+                      payment.toBank?.copyWith(accountNumber: value) ?? BankBeneficiary(accountNumber: value)
+                    );
                   },
                 ),
               ),
@@ -205,7 +201,7 @@ class PaymentAccountInputForm extends HookConsumerWidget {
     );
   }
   
-  Widget nameInput(BuildContext context, Function(String)? onChanged) {
+  Widget nameInput(BuildContext context, PaymentNotifier paymentNotifier, WalletTransaction payment) {
     final theme = Theme.of(context);
 
     return Container(
@@ -244,7 +240,9 @@ class PaymentAccountInputForm extends HookConsumerWidget {
                 FocusScope.of(context).unfocus();
               },
               onChanged: (value) {
-                onChanged?.call(value);
+                paymentNotifier.updateToBank(
+                  payment.toBank?.copyWith(accountName: value) ?? BankBeneficiary(accountName: value)
+                );
               },
             ),
           ),

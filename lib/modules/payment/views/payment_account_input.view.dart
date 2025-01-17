@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:paily/modules/payment/providers/payment.provider.dart';
 import 'package:paily/modules/payment/views/payment_amount_input.view.dart';
 import 'package:paily/modules/payment/widgets/payment_account_input_appbar.widget.dart';
 import 'package:paily/modules/payment/widgets/payment_account_input_form.widget.dart';
@@ -12,8 +11,6 @@ class PaymentAccountInputView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final paymentNotifier = ref.watch(paymentNotifierProvider.notifier);
-
     return ColoredBox(
       color: Colors.white,
       child: SafeArea(
@@ -26,11 +23,7 @@ class PaymentAccountInputView extends ConsumerWidget {
                   padding: AppPaddingTheme.contentPadding,
                   child: Column(
                     children: [
-                      PaymentAccountInputForm(
-                        onChanged: (value) {
-                          paymentNotifier.updateToBank(value);
-                        },
-                      ),
+                      PaymentAccountInputForm(),
                     ],
                   ),
                 ),
