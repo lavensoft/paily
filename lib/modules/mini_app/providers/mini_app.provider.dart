@@ -7,7 +7,7 @@ final mockup = [
   MiniApp(
     id: '0', 
     name: 'App 1', 
-    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
+    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2Ftaxi_icon.png?alt=media&token=7507b64b-eb4f-4aca-b8ed-9a3b1d968d69', 
     url: 'https://lavenes.com'
   ),
   MiniApp(

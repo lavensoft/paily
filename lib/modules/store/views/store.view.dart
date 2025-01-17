@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
@@ -19,12 +20,11 @@ class StoreView extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: AppPaddingTheme.contentPadding.copyWith(
-            top: 0,
             bottom: 0,
           ),
           child: FilledButton(
             onPressed: () {}, 
-            child: Text('Navigate')
+            child: Text('Booking from \$10.00'),
           ),
         ),
       ),
@@ -42,12 +42,22 @@ class StoreView extends StatelessWidget {
             child: Container(
               padding: AppPaddingTheme.contentPadding,
               child: Column(
-                spacing: 3,
+                spacing: 6,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Ba Na Hills',
-                    style: theme.textTheme.titleMedium,
+                  Row(
+                    spacing: 9,
+                    children: [
+                      Text(
+                        'Ba Na Hills',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                      Badge(
+                        label: Text('Openning'),
+                        backgroundColor: CupertinoColors.activeGreen.withOpacity(.09),
+                        textColor: CupertinoColors.activeGreen,
+                      ),
+                    ],
                   ),
                   Text(
                     'Theme parks may not be to every traveller’s taste. But Ba Na Hills is a must-visit for everyone. The French village is a replica of a medieval town, complete with European-style buildings, an impressive cathedral, and a quaint village square.',
@@ -89,6 +99,117 @@ class StoreView extends StatelessWidget {
                 ],
               ),
             )
+          ),
+      
+          SliverToBoxAdapter(
+            child: Container(
+              padding: AppPaddingTheme.contentPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Utilities',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      HugeIcons.strokeRoundedWifi01,
+                      size: 21,
+                    ),
+                    title: Text('Wifi'),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      HugeIcons.strokeRoundedKitchenUtensils,
+                      size: 21,
+                    ),
+                    title: Text('Kitchen'),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      HugeIcons.strokeRoundedLaptop,
+                      size: 21,
+                    ),
+                    title: Text('Private space to work'),
+                  )
+                ],
+              ),
+            ),
+          ),
+      
+          SliverToBoxAdapter(
+            child: Container(
+              padding: AppPaddingTheme.contentPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Services',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(9),
+                      child: CachedNetworkImage(
+                        imageUrl: 'https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-superJumbo.jpg',
+                        width: 63,
+                        height: 63,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    title: Text('King Room'),
+                    subtitle: Text('\$10.00'),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(9),
+                      child: CachedNetworkImage(
+                        imageUrl: 'https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-superJumbo.jpg',
+                        width: 63,
+                        height: 63,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    title: Text('King Room'),
+                    subtitle: Text('\$10.00'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+      
+          SliverToBoxAdapter(
+            child: Container(
+              padding: AppPaddingTheme.contentPadding,
+              child: Column(
+                spacing: 6,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Location',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  Text(
+                    '15 Nai Nghia 1',
+                    style: theme.textTheme.bodyMedium!.copyWith(  
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  FilledButton.tonalIcon(
+                    onPressed: () {}, 
+                    label: Text('Navigate'),
+                    icon: Icon(
+                      HugeIcons.strokeRoundedNavigation01
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       ),
