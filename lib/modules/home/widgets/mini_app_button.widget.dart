@@ -28,8 +28,8 @@ class MiniAppButton extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: SizedBox(
-                width: 48,
-                height: 48,
+                width: 63,
+                height: 63,
                 child: Visibility(
                   visible: !loading && imageUrl != null,
                   replacement: Container(
@@ -37,6 +37,9 @@ class MiniAppButton extends StatelessWidget {
                   ),
                   child: CachedNetworkImage(
                     imageUrl: imageUrl ?? '',
+                    placeholder: (context, url) => Container(
+                      color: Colors.grey[300],
+                    ),
                   ),
                 ),
               ),

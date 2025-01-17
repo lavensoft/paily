@@ -82,7 +82,13 @@ class HomeView extends ConsumerWidget {
                       return MiniAppButton(
                         imageUrl: app.iconImageUrl, 
                         label: app.name, 
-                        onTap: () {  },
+                        onTap: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Coming soon'),
+                            ),
+                          );
+                        },
                       );
                     }).toList(),
                   ),

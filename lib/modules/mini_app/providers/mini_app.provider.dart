@@ -6,27 +6,26 @@ part 'mini_app.provider.g.dart';
 final mockup = [
   MiniApp(
     id: '0', 
-    name: 'App 1', 
-    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2Ftaxi_icon.png?alt=media&token=7507b64b-eb4f-4aca-b8ed-9a3b1d968d69', 
+    name: 'Taxi', 
+    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2Ftaxi_icon.png?alt=media&token=052d866f-e11c-48c7-8204-3ba96999e417', 
     url: 'https://lavenes.com'
   ),
   MiniApp(
     id: '0', 
-    name: 'App 1', 
-    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
+    name: 'Hotel', 
+    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2Fhotel_icon.png?alt=media&token=ced5147b-32de-4db4-8193-ee86cf438997', 
     url: 'https://lavenes.com'
   ),
   MiniApp(
     id: '0', 
-    name: 'App 1', 
-    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
+    name: 'Food', 
+    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2Ffood_icon.png?alt=media&token=edb11acb-2bd3-4ca1-8fa7-cb3c3adda82a', 
     url: 'https://lavenes.com'
   ),
   MiniApp(
     id: '0', 
-    name: 'App 1', 
-    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2FCGV%20App%20Icon.png?alt=media&token=e7a676e6-80ad-4e92-a61d-dfb892262879', 
-    url: 'https://lavenes.com'
+    name: 'More', 
+    iconImageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Fmini-apps%2Fanother_icon.png?alt=media&token=df63ce94-91ef-4c6c-9562-16959442047c'
   )
 ];
 
