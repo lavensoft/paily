@@ -157,19 +157,22 @@ class PaymentResultView extends HookConsumerWidget {
                               ],
                             ),
                             Divider(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
+                            Visibility(
+                              visible: payment.discountLocalCur != null && payment.discountLocalCur! > 0,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
                                   Text('Discount'),
                                   Text(
                                     '\$${
-                                      FormatHelper.formatNumber(payment.discountLocalCur, 'vi_VN')
+                                      FormatHelper.formatNumber(payment.discountLocalCur ?? 0, 'vi_VN')
                                     }',
                                     style: theme.textTheme.bodyMedium!.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                              ],
+                                ],
+                              ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -7,7 +7,7 @@ part 'wallet.provider.g.dart';
 
 @riverpod
 Future<WalletTotalBalance> walletTotalBalance(Ref ref) async {
-  final walletAsset = await ref.watch(listWalletAssetProvider.future);
+  final walletAsset = await ref.watch(walletAssetNotifierProvider.future);
   final primaryAsset = walletAsset.firstWhere((element) => element.isPrimary);
 
   //Delay random

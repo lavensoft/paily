@@ -61,9 +61,8 @@ class PaymentNotifier extends _$PaymentNotifier {
   }
 
   confirmPayment() async {
-    ref.watch(walletAssetNotifierProvider.notifier).decreaseBalance(state.asset!.id, state.totalLocalCur!);
-    final assets = await ref.watch(walletAssetNotifierProvider.future);
-    final remainingBalance = assets.firstWhere((element) => element.id == state.asset!.id).amount;
+    final asset = await ref.watch(walletAssetNotifierProvider.notifier).decreaseBalance(state.asset!.id, state.totalLocalCur!);
+    final remainingBalance = asset.amount;
 
     //Send local notification
     final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();

@@ -42,13 +42,16 @@ class WalletAssetNotifier extends _$WalletAssetNotifier {
     return data;
   }
 
-  Future<void> decreaseBalance(String walletAssetId, double amount) async {
+  Future<WalletAsset> decreaseBalance(String walletAssetId, double amount) async {
     final prevState = await future;
     var walletAsset = prevState.firstWhere((element) => element.id == walletAssetId);
     walletAsset = walletAsset.copyWith(amount: walletAsset.amount - amount);
 
-    await walletAssets.doc(walletAssetId).update(walletAsset.toJson());
+    final asset = await walletAssets.where('id', isEqualTo: walletAssetId).get();
+    await asset.docs.first.reference.update(walletAsset.toJson());
 
     ref.invalidateSelf();
+
+    return walletAsset;
   }
 }

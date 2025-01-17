@@ -22,12 +22,13 @@ class PaymentConfirmView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCardIndex = useState('');
+    final selectedWalletIndex = useState('');
 
     final theme = Theme.of(context);
     
-    final walletAsset = ref.watch(listWalletAssetProvider);
+    final walletAsset = ref.watch(walletAssetNotifierProvider);
     final payment = ref.watch(paymentNotifierProvider);
+    final paymentNotifier = ref.watch(paymentNotifierProvider.notifier);
     final listMeCoupon = ref.watch(listMeCouponProvider);
 
     return ColoredBox(
@@ -74,6 +75,17 @@ class PaymentConfirmView extends HookConsumerWidget {
                   child: FilledButton(
                     child: Text('Confirm Payment'),
                     onPressed: () async {
+                      if (selectedWalletIndex.value.isEmpty) {
+                        ScaffoldMessenger
+                          .of(context)
+                          .showSnackBar(
+                            SnackBar(
+                              content: Text('Please select a wallet to pay'),
+                            ),
+                          );
+                        return;
+                      }
+
                       final LocalAuthentication auth = LocalAuthentication();
 
                       try {
@@ -83,6 +95,8 @@ class PaymentConfirmView extends HookConsumerWidget {
 
                         if (didAuthenticate) {
                           if (context.mounted) {
+                            await paymentNotifier.confirmPayment();
+
                             Navigator
                               .of(context)
                               .pushReplacement(
@@ -126,9 +140,10 @@ class PaymentConfirmView extends HookConsumerWidget {
                           return Padding(
                             padding: EdgeInsets.only(left: 2),
                             child: WalletSelectCard(
-                              isSelected: value[i].id == selectedCardIndex.value,
+                              isSelected: value[i].id == selectedWalletIndex.value,
                               onSelected: () {
-                                selectedCardIndex.value = value[i].id;
+                                selectedWalletIndex.value = value[i].id;
+                                paymentNotifier.updateAsset(value[i]);
                               },
                               image: value[i].iconImageUrl,
                               title: value[i].name,
