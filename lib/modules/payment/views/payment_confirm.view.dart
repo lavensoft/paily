@@ -1,10 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:paily/modules/coupon/providers/coupon.provider.dart';
+import 'package:paily/modules/coupon/widgets/coupon_card.widget.dart';
 import 'package:paily/modules/payment/providers/payment.provider.dart';
 import 'package:paily/modules/payment/views/payment_result.view.dart';
 import 'package:paily/modules/payment/widgets/wallet_select_card.widget.dart';
@@ -14,6 +15,7 @@ import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/section_group.widget.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PaymentConfirmView extends HookConsumerWidget {
   const PaymentConfirmView({super.key});
@@ -26,6 +28,7 @@ class PaymentConfirmView extends HookConsumerWidget {
     
     final walletAsset = ref.watch(listWalletAssetProvider);
     final payment = ref.watch(paymentNotifierProvider);
+    final listMeCoupon = ref.watch(listMeCouponProvider);
 
     return ColoredBox(
       color: Colors.white,
@@ -37,18 +40,26 @@ class PaymentConfirmView extends HookConsumerWidget {
           bottomNavigationBar: Container(
             padding: AppPaddingTheme.contentPadding.copyWith(
               top: 0,
-              bottom: 0,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
+                  spacing: 6,
                   children: [
                     Text(
                       'Total',
                       style: theme.textTheme.titleSmall,
                     ),
                     Spacer(),
+                    Text(
+                      '\$${
+                        FormatHelper.formatNumber(payment.totalLocalCur ?? 0)
+                      }',
+                      style: theme.textTheme.bodyLarge!.copyWith(
+                        decoration: TextDecoration.lineThrough
+                      ),
+                    ),
                     Text(
                       '\$${FormatHelper.formatNumber(payment.totalLocalCur ?? 0)}',
                       style: theme.textTheme.titleSmall!.copyWith(
@@ -112,14 +123,17 @@ class PaymentConfirmView extends HookConsumerWidget {
                         title: 'Wallet & Card',
                         itemCount: value.length,
                         itemBuilder: (context, i) {
-                          return WalletSelectCard(
-                            isSelected: value[i].id == selectedCardIndex.value,
-                            onSelected: () {
-                              selectedCardIndex.value = value[i].id;
-                            },
-                            image: value[i].iconImageUrl,
-                            title: value[i].name,
-                            balance: value[i].amount,
+                          return Padding(
+                            padding: EdgeInsets.only(left: 2),
+                            child: WalletSelectCard(
+                              isSelected: value[i].id == selectedCardIndex.value,
+                              onSelected: () {
+                                selectedCardIndex.value = value[i].id;
+                              },
+                              image: value[i].iconImageUrl,
+                              title: value[i].name,
+                              balance: value[i].amount,
+                            ),
                           );
                         },
                       ),
@@ -231,9 +245,18 @@ class PaymentConfirmView extends HookConsumerWidget {
                               ],
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              spacing: 6,
                               children: [
                                 Text('Total'),
+                                Spacer(),
+                                Text(
+                                  '\$${
+                                    FormatHelper.formatNumber(payment.totalLocalCur ?? 0)
+                                  }',
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    decoration: TextDecoration.lineThrough
+                                  ),
+                                ),
                                 Text(
                                   '\$${
                                     FormatHelper.formatNumber(payment.totalLocalCur ?? 0)
@@ -250,90 +273,90 @@ class PaymentConfirmView extends HookConsumerWidget {
                                 spacing: 6,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Coupon', 
-                                    style: theme.textTheme.titleSmall
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Coupon', 
+                                        style: theme.textTheme.titleSmall
+                                      ),
+                                      Visibility(
+                                        visible: payment.discountLocalCur != 0 && payment.discountLocalCur != null,
+                                        child: Badge(
+                                          label: Text('Discount \$${payment.discountLocalCur}'),
+                                          backgroundColor: CupertinoColors.activeGreen.withOpacity(.09),
+                                          textColor: CupertinoColors.activeGreen,
+                                        )
+                                      )
+                                    ],
                                   ),
                                   Text(
                                     'Add a coupon or enter a promo code',
                                   ),
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: payment.coupons?.length ?? 0,
+                                    itemBuilder: (context, index) {
+                                      return CouponCard(coupon: payment.coupons![index]);
+                                    },
+                                  ),
                                   Container(
                                     margin: EdgeInsets.only(top: 12),
                                     width: double.infinity,
-                                    child: FilledButton(
-                                      child: Text('Add a coupon'), 
-                                      onPressed: () async {
-                                        await showModalBottomSheet(
-                                          context: context, 
-                                          builder: (context) {
-                                            return Container(
-                                              padding: AppPaddingTheme.contentPadding,
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Add a coupon',
-                                                    style: theme.textTheme.titleSmall
-                                                  ),
-                                                  SizedBox(height: 12),
-                                                  Container(
-                                                    margin: EdgeInsets.only(top: 24),
-                                                    padding: EdgeInsets.all(15),
-                                                    decoration: BoxDecoration(
-                                                      color: theme.colorScheme.surfaceContainerLowest,
-                                                      borderRadius: BorderRadius.circular(15),
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          'Shop Name',
-                                                          style: theme.textTheme.bodyMedium!.copyWith(
-                                                            fontWeight: FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                        SizedBox(height: 12),
-                                                        Row(
-                                                          spacing: 6,
-                                                          children: [
-                                                            CachedNetworkImage(
-                                                              imageUrl: 'https://firebasestorage.googleapis.com/v0/b/paily-app.firebasestorage.app/o/assets%2Flogos%2Fmastercard_logo.png?alt=media&token=71a0ff31-9e78-4684-b4f5-3163196a187a',
-                                                              width: 48,
-                                                              height: 48,
-                                                            ),
-                                                            SizedBox(width: 12),
-                                                            Text(
-                                                              'Discount 10% for all products',
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        SizedBox(height: 6),
-                                                        Divider(),
-                                                        SizedBox(height: 6),
-                                                        Container(
-                                                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                                          decoration: BoxDecoration(
-                                                            color: theme.colorScheme.primaryContainer,
-                                                            borderRadius: BorderRadius.circular(12),
-                                                          ),
-                                                          child: Text(
-                                                            'Expires on: 12/12/2023',
-                                                            style: theme.textTheme.bodySmall!.copyWith(
-                                                              color: theme.colorScheme.primary,
-                                                              fontWeight: FontWeight.w600,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            );
+                                    child: switch(listMeCoupon) {
+                                      AsyncError(:final error) => Text(error.toString()),
+                                      AsyncData(:final value) => FilledButton(
+                                        child: Text('Add a coupon'), 
+                                        onPressed: () async {
+                                          //!HARDCODE: Limit for 1 coupon
+                                          if (payment.coupons?.length == 1) {
+                                            ScaffoldMessenger
+                                              .of(context)
+                                              .showSnackBar(
+                                                SnackBar(
+                                                  content: Text('You can only apply 1 coupon'),
+                                                ),
+                                              );
+                                            return;
                                           }
-                                        );
-                                      }
-                                    )
+
+                                          await showModalBottomSheet(
+                                            context: context, 
+                                            builder: (context) {
+                                              return Container(
+                                                padding: AppPaddingTheme.contentPadding,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Add a coupon',
+                                                      style: theme.textTheme.titleSmall
+                                                    ),
+                                                    SizedBox(height: 12),
+                                                    ListView.builder(
+                                                      shrinkWrap: true,
+                                                      itemCount: value.length,
+                                                      itemBuilder: (context, index) {
+                                                        return CouponCard(
+                                                          coupon: value[index],
+                                                          onTap: () {
+                                                            ref.read(paymentNotifierProvider.notifier).applyCoupon(value[index]);
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                        );
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                              );
+                                            }
+                                          );
+                                        }
+                                      ),
+                                      _ => Skeletonizer(
+                                        child: FilledButton(onPressed: () {}, child: Text('Add a coupon'))
+                                      )
+                                    }
                                   ),
                                 ],
                               )

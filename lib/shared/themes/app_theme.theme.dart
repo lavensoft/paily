@@ -32,6 +32,16 @@ class AppTheme {
     ),
     //#endregion
 
+    //#region Widgets
+    badgeTheme: BadgeThemeData(
+      textStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    ),
+    //#endregion
+
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(

@@ -1,4 +1,5 @@
 import 'package:paily/modules/bank/models/bank_beneficiary.model.dart';
+import 'package:paily/modules/coupon/models/coupon.model.dart';
 import 'package:paily/modules/wallet/models/wallet_asset.model.dart';
 import 'package:paily/modules/wallet/models/wallet_transaction.model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,7 +15,7 @@ class PaymentNotifier extends _$PaymentNotifier {
   @override
   set state(WalletTransaction newState) => super.state = newState;
 
-  updateAmount(double amount) async {
+  updateAmount(double amount) {
     double fee = amount * 0.02;
 
     state = state.copyWith(
@@ -27,15 +28,32 @@ class PaymentNotifier extends _$PaymentNotifier {
     );
   }
 
-  updateNote(String note) async {
+  updateNote(String note) {
     state = state.copyWith(note: note);
   }
 
-  updateToBank(BankBeneficiary beneficiary) async {
+  updateToBank(BankBeneficiary beneficiary) {
     state = state.copyWith(toBank: beneficiary);
   }
 
-  updateAsset(WalletAsset asset) async {
+  updateAsset(WalletAsset asset) {
     state = state.copyWith(asset: asset);
+  }
+
+  applyCoupon(Coupon coupon) {
+    state = state.copyWith(coupons: (state.coupons ?? [])..add(coupon));
+
+    double totalDiscountRate = state.coupons!.fold(0, (previousValue, element) => previousValue + element.discountRate!);
+    double discount = state.amount! * totalDiscountRate;
+    double total = state.amount! + state.fee!;
+
+    state = state.copyWith(
+      discount: discount,
+      discountLocalCur: discount / 25400, //!HARDCODE
+      total: total - discount,
+      totalLocalCur: (total - discount) / 25400, //!HARDCODE
+      totalBeforeDiscount: total,
+      totalBeforeDiscountLocalCur: total / 25400, //!HARDCODE
+    );
   }
 }
