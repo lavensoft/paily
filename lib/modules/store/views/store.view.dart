@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:paily/modules/mini_app/views/mini_app.view.dart';
 import 'package:paily/modules/store/enums/store_type.enum.dart';
 import 'package:paily/modules/store/models/store.model.dart';
 import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/inline_button.widget.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StoreView extends StatelessWidget {
   const StoreView({super.key, required this.store});
@@ -29,7 +31,22 @@ class StoreView extends StatelessWidget {
             bottom: 0,
           ),
           child: FilledButton(
-            onPressed: () {}, 
+            onPressed: () async {
+              if (store.miniAppUrl != null) {
+                Navigator
+                  .of(context)
+                  .push(
+                    CupertinoPageRoute(
+                      builder: (context) => MiniAppView(
+                        url: store.miniAppUrl!,
+                              name: store.name
+                      )
+                    )
+                  );
+              } else if (store.website != null) {
+                await launchUrl(Uri.parse(store.website!));
+              }
+            }, 
             child: Text(
               switch(store.type) {
                 EStoreType.landscape => 'Navigate',
@@ -98,7 +115,18 @@ class StoreView extends StatelessWidget {
                     visible: store.miniAppUrl != null,
                     child: Expanded(
                       child: InlineButton(
-                        onPressed: () {}, 
+                        onPressed: () {
+                          Navigator
+                            .of(context)
+                            .push(
+                              CupertinoPageRoute(
+                                builder: (context) => MiniAppView(
+                                  url: store.miniAppUrl!,
+                                  name: store.name
+                                )
+                              )
+                            );
+                        }, 
                         label: Text('Mini-app'),
                         icon: Icon(
                           HugeIcons.strokeRoundedWebDesign01
@@ -110,7 +138,9 @@ class StoreView extends StatelessWidget {
                     visible: store.website != null,
                     child: Expanded(
                       child: InlineButton(
-                        onPressed: () {}, 
+                        onPressed: () async {
+                          await launchUrl(Uri.parse(store.website!));
+                        }, 
                         label: Text('Website'),
                         icon: Icon(
                           HugeIcons.strokeRoundedGlobe02
