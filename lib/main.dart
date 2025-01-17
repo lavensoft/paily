@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:blur/blur.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -19,8 +22,8 @@ void main() async {
   );
 
   await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.debug,
-    appleProvider: AppleProvider.debug,
+    androidProvider: kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
   );
 
   //!FIXME: For MVP
@@ -46,6 +49,11 @@ class App extends HookWidget {
     useEffect(() {
       authenticate() async {
         try {
+          if (Platform.isAndroid) {
+            isAuthenticated.value = true;
+            return;
+          }
+
           final bool didAuthenticate = await auth.authenticate(
             localizedReason: 'Please authenticate to confirm payment',
           );
@@ -56,17 +64,7 @@ class App extends HookWidget {
             }
           }
         } on PlatformException {
-          if (context.mounted) {
-            ScaffoldMessenger
-              .of(context)
-              .showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Failed to authenticate. Please try again.',
-                  ),
-                ),
-              );
-          }
+          if (context.mounted) {}
         }
       }
 
@@ -83,12 +81,12 @@ class App extends HookWidget {
           return FadeTransition(opacity: animation, child: child);
         },
         child: isAuthenticated.value
-        ? const HomeView()
-        : Blur(
-            blur: 6,
-            colorOpacity: 0.1,
-            child: const HomeView(),
-          ),
+            ? const HomeView()
+            : Blur(
+                blur: 6,
+                colorOpacity: 0.1,
+                child: const HomeView(),
+              ),
       ),
     );
   }
