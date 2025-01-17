@@ -86,14 +86,14 @@ class DepositBankQRView extends HookConsumerWidget {
             
                   Spacer(),
                   Text(
-                    'Nhat Tran',
+                    'Beneficiary',
                     style: theme.textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 3,),
                   Text(
-                    'VP Bank 20782048',
+                    'VP Bank | 20782048',
                     style: theme.textTheme.bodyMedium,
                   )
                 ],
