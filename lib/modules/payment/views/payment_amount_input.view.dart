@@ -8,6 +8,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:paily/modules/bank/models/bank.model.dart';
 import 'package:paily/modules/payment/providers/payment.provider.dart';
 import 'package:paily/modules/payment/views/payment_confirm.view.dart';
+import 'package:paily/modules/wallet/models/wallet_transaction.model.dart';
 import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:paily/shared/themes/app_padding.theme.dart';
 import 'package:paily/shared/widgets/view_appbar.widget.dart';
@@ -18,6 +19,7 @@ class PaymentAmountInputView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final payment = ref.watch(paymentNotifierProvider);
+    final paymentNotifier = ref.watch(paymentNotifierProvider.notifier);
 
     return ColoredBox(
       color: Colors.white,
@@ -32,7 +34,7 @@ class PaymentAmountInputView extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 bankSelect(context, payment.toBank!.bank!),
-                inputForm(context, ref),
+                inputForm(context, ref, payment, paymentNotifier),
                 bottomBar(context, ref),
               ]
             )
@@ -140,7 +142,7 @@ class PaymentAmountInputView extends ConsumerWidget {
     );
   }
 
-  Widget inputForm(BuildContext context, WidgetRef ref) {
+  Widget inputForm(BuildContext context, WidgetRef ref, WalletTransaction payment, PaymentNotifier paymentNotifier) {
     final theme = Theme.of(context);
 
     return Expanded(
@@ -172,9 +174,7 @@ class PaymentAmountInputView extends ConsumerWidget {
               },
               onChanged: (value) {
                 if (value.isEmpty) {
-                  ref
-                    .watch(paymentNotifierProvider.notifier)
-                    .updateAmount(0);
+                  paymentNotifier.updateAmount(0);
                   return;
                 }
 
@@ -184,19 +184,13 @@ class PaymentAmountInputView extends ConsumerWidget {
                     .replaceAll('.', '')
                     .replaceAll(',', '')
                 );
-                ref
-                  .watch(paymentNotifierProvider.notifier)
-                  .updateAmount(amount);
-
-                ref
-                  .watch(paymentNotifierProvider.notifier)
-                  .updateAmountLocalCur(amount / 25400); //!HARDCODE
+                paymentNotifier.updateAmount(amount);
               },
             ),
           ),
           Text(
             '≈ \$${
-              FormatHelper.formatNumber(ref.watch(paymentNotifierProvider).amountLocalCur ?? 0)
+              FormatHelper.formatNumber(payment.amountLocalCur ?? 0)
             }',
             style: theme.textTheme.bodyLarge,
           )

@@ -12,6 +12,8 @@ class PaymentAccountInputView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final paymentNotifier = ref.watch(paymentNotifierProvider.notifier);
+
     return ColoredBox(
       color: Colors.white,
       child: SafeArea(
@@ -26,9 +28,7 @@ class PaymentAccountInputView extends ConsumerWidget {
                     children: [
                       PaymentAccountInputForm(
                         onChanged: (value) {
-                          ref
-                            .watch(paymentNotifierProvider.notifier)
-                            .updateToBank(value);
+                          paymentNotifier.updateToBank(value);
                         },
                       ),
                     ],
