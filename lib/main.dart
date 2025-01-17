@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:paily/modules/home/views/home.view.dart';
 import 'package:paily/shared/themes/app_theme.theme.dart';
 import 'firebase_options.dart';
@@ -23,6 +24,17 @@ void main() async {
   if (user == null) {
     await FirebaseAuth.instance.signInAnonymously();
   }
+
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+      AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
+  const initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+  final initializationSettingsDarwin = DarwinInitializationSettings();
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsDarwin
+  );
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   runApp(ProviderScope(child: const App()));
 }
