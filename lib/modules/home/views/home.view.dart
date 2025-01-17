@@ -28,7 +28,6 @@ class HomeView extends ConsumerWidget {
     return Scaffold(
       appBar: HomeHeader(),
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
         slivers: [
           // SliverSection(
           //   child: HeadSearchBar()
