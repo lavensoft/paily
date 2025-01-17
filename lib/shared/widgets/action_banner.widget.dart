@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paily/shared/themes/app_radius.theme.dart';
 import 'package:paily/shared/widgets/rounded_button.widget.dart';
@@ -37,6 +38,7 @@ class ActionBanner extends StatelessWidget {
               ),
             ),
             borderRadius: AppRadiusTheme.containerRadius,
+            color: CupertinoColors.inactiveGray
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
