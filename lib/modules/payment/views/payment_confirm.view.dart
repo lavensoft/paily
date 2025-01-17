@@ -155,7 +155,7 @@ class PaymentConfirmView extends HookConsumerWidget {
                                 Text('Amount'),
                                 Text(
                                   'VND ${
-                                    FormatHelper.formatNumber(payment.amount ?? 0)
+                                    FormatHelper.formatNumber(payment.amount ?? 0, 'vi_VN')
                                   } (\$${
                                     FormatHelper.formatNumber(payment.amountLocalCur ?? 0)
                                   })',
