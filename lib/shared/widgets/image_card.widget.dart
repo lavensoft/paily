@@ -84,6 +84,8 @@ class ImageCard extends StatelessWidget {
                           style: theme.textTheme.bodySmall!.copyWith(
                             color: Colors.white,
                           ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

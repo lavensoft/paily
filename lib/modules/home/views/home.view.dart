@@ -213,7 +213,7 @@ class HomeView extends ConsumerWidget {
           SliverSection(
             child: Container(
               height: 300,
-              margin: EdgeInsets.only(top: 24),
+              margin: EdgeInsets.only(top: 24, bottom: 48),
               child: switch(store) {
                 AsyncData(:final value) => SectionGroup(
                 title: 'Restaurant',

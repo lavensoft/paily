@@ -73,10 +73,14 @@ class ProductCard extends StatelessWidget {
                         style: theme.textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         loading ? 'Lorem ip sum description' : description ?? '',
                         style: theme.textTheme.bodySmall,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
