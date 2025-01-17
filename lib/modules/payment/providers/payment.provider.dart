@@ -1,7 +1,10 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:paily/modules/bank/models/bank_beneficiary.model.dart';
 import 'package:paily/modules/coupon/models/coupon.model.dart';
 import 'package:paily/modules/wallet/models/wallet_asset.model.dart';
 import 'package:paily/modules/wallet/models/wallet_transaction.model.dart';
+import 'package:paily/modules/wallet/providers/wallet_asset.provider.dart';
+import 'package:paily/shared/helpers/formatter.helper.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'payment.provider.g.dart';
@@ -54,6 +57,24 @@ class PaymentNotifier extends _$PaymentNotifier {
       totalLocalCur: (total - discount) / 25400, //!HARDCODE
       totalBeforeDiscount: total,
       totalBeforeDiscountLocalCur: total / 25400, //!HARDCODE
+    );
+  }
+
+  confirmPayment() async {
+    ref.watch(walletAssetNotifierProvider.notifier).decreaseBalance(state.asset!.id, state.totalLocalCur!);
+    final assets = await ref.watch(walletAssetNotifierProvider.future);
+    final remainingBalance = assets.firstWhere((element) => element.id == state.asset!.id).amount;
+
+    //Send local notification
+    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    await flutterLocalNotificationsPlugin.show( 
+      0, 
+      'Transfer successfully!', 
+      'You have successfully sent \$${
+        FormatHelper.formatNumber(state.totalLocalCur)
+      }, the remaining balance: \$${
+        FormatHelper.formatNumber(remainingBalance)
+      }', null
     );
   }
 }
