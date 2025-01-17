@@ -27,16 +27,14 @@ class StoreView extends StatelessWidget {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: AppPaddingTheme.contentPadding.copyWith(
-            bottom: 0,
-          ),
+          padding: AppPaddingTheme.contentPadding,
           child: FilledButton(
             onPressed: () async {
               if (store.miniAppUrl != null) {
                 Navigator
                   .of(context)
                   .push(
-                    CupertinoPageRoute(
+                    CupertinoModalPopupRoute(
                       builder: (context) => MiniAppView(
                         url: store.miniAppUrl!,
                               name: store.name
@@ -119,7 +117,7 @@ class StoreView extends StatelessWidget {
                           Navigator
                             .of(context)
                             .push(
-                              CupertinoPageRoute(
+                              CupertinoModalPopupRoute(
                                 builder: (context) => MiniAppView(
                                   url: store.miniAppUrl!,
                                   name: store.name
