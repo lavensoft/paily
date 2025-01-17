@@ -42,7 +42,7 @@ class HomeView extends ConsumerWidget {
                   localCurrencySymbol: value.localCurrencySymbol,
                   foreignCurrencySymbol: value.foreignCurrencySymbol,
                 ),
-                AsyncError() => Text('Error'),
+                AsyncError(:final error) => Text(error.toString()),
                 _ => BalanceCard(
                   loading: true,
                 ),
