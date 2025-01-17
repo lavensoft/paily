@@ -69,7 +69,7 @@ class BalanceCard extends StatelessWidget {
           Skeletonizer(
               enabled: loading,
               child: Text(
-                '$foreignCurrencySymbol ${FormatHelper.formatNumber(foreignBalance ?? 0)}',
+                '$foreignCurrencySymbol ${FormatHelper.formatNumber(foreignBalance ?? 0, 'vi_VN')}',
                 style: theme.textTheme.bodyLarge!
                     .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
               )),
