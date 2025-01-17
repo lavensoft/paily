@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:paily/modules/store/enums/store_type.enum.dart';
+import 'package:paily/modules/store/models/store_product.model.dart';
 
 part 'store.model.freezed.dart';
 part 'store.model.g.dart';
@@ -10,10 +12,14 @@ class Store with _$Store {
     required String name,
     required String description,
     required List<String> imageUrls,
-    required String miniAppUrl,
-    required String website,
+    String? miniAppUrl,
+    String? website,
+    required String address,
     required double lat,
     required double lng,
+    double? priceFromLocalCur,
+    List<StoreProduct>? services,
+    required EStoreType type,
   }) = _Store;
 
   factory Store.fromJson(Map<String, dynamic> json) => _$StoreFromJson(json);
